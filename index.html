@@ -1,0 +1,417 @@
+<!DOCTYPE html>
+<html lang="ko">
+<head>
+<meta charset="UTF-8" />
+<meta name="viewport" content="width=device-width, initial-scale=1.0" />
+<title>단어 학습</title>
+<script src="https://cdnjs.cloudflare.com/ajax/libs/react/18.2.0/umd/react.production.min.js"></script>
+<script src="https://cdnjs.cloudflare.com/ajax/libs/react-dom/18.2.0/umd/react-dom.production.min.js"></script>
+<script src="https://cdnjs.cloudflare.com/ajax/libs/babel-standalone/7.23.2/babel.min.js"></script>
+<style>
+  * { margin: 0; padding: 0; box-sizing: border-box; }
+  body { background: #f5f4f0; font-family: 'Georgia', 'Batang', serif; }
+  button { font-family: 'Georgia', 'Batang', serif; }
+  textarea { font-family: 'Georgia', 'Batang', serif; }
+  input { font-family: 'Georgia', 'Batang', serif; }
+</style>
+</head>
+<body>
+<div id="root"></div>
+<script type="text/babel">
+const { useState, useEffect } = React;
+
+const STORAGE_KEY = "vocab-test-words";
+
+const PLACEHOLDER = `1. Acoustic
+청각의
+19. Plethora
+과다, 과잉
+2. Charter
+선언서`;
+
+function parseWords(text) {
+  const lines = text.trim().split("\n").map(l => l.trim()).filter(Boolean);
+  const words = [];
+  let i = 0;
+  while (i < lines.length) {
+    const line = lines[i];
+    const stripped = line.replace(/^\d+[\.\)]\s*/, "").trim();
+    const sep = stripped.includes(" - ") ? " - " : stripped.includes(":") ? ":" : null;
+    if (sep) {
+      const si = stripped.indexOf(sep);
+      const en = stripped.slice(0, si).trim();
+      const kr = stripped.slice(si + sep.length).trim();
+      if (en && kr) words.push({ en, kr });
+      i++; continue;
+    }
+    const nextLine = lines[i + 1];
+    if (nextLine && !/^\d+[\.\)]/.test(nextLine)) {
+      const en = stripped;
+      const kr = nextLine.trim();
+      if (en && kr) words.push({ en, kr });
+      i += 2; continue;
+    }
+    i++;
+  }
+  return words;
+}
+
+function shuffle(arr) {
+  const a = [...arr];
+  for (let i = a.length - 1; i > 0; i--) {
+    const j = Math.floor(Math.random() * (i + 1));
+    [a[i], a[j]] = [a[j], a[i]];
+  }
+  return a;
+}
+
+function generateQuestions(words) {
+  if (words.length < 2) return [];
+  return shuffle(words).map((w, i) => {
+    const direction = i % 2 === 0 ? "en2kr" : "kr2en";
+    const prompt = direction === "en2kr" ? w.en : w.kr;
+    const answer = direction === "en2kr" ? w.kr : w.en;
+    const others = shuffle(words.filter(x => x.en !== w.en)).slice(0, 3);
+    const wrongChoices = others.map(x => direction === "en2kr" ? x.kr : x.en);
+    const choices = shuffle([answer, ...wrongChoices]);
+    return { id: i, direction, prompt, answer, choices, hint: direction === "en2kr" ? "🇺🇸→🇰🇷" : "🇰🇷→🇺🇸" };
+  });
+}
+
+const LABELS = ["①", "②", "③", "④"];
+
+const S = {
+  card: { width: "100%", maxWidth: 580, background: "#fff", border: "1.5px solid #e5e7eb", borderRadius: 18, boxShadow: "0 6px 32px rgba(0,0,0,0.07)", overflow: "hidden" },
+  btnDark: { width: "100%", padding: "14px", background: "#111827", color: "#fff", border: "none", borderRadius: 10, fontSize: 15, fontWeight: 700, cursor: "pointer" },
+  btnOutline: { flex: 1, padding: "13px", background: "#fff", color: "#111", border: "1.5px solid #111", borderRadius: 10, fontSize: 14, fontWeight: 700, cursor: "pointer" },
+};
+
+function ModeSelector({ words, onSelect, onEdit }) {
+  const modes = [
+    { id: "wordbook", icon: "📖", label: "단어집",    desc: "전체 단어 목록 보기" },
+    { id: "one",      icon: "🎯", label: "한 문제씩", desc: "한 번에 하나씩 풀기" },
+    { id: "test",     icon: "📝", label: "시험지",    desc: "전체 문제 한 번에" },
+  ];
+  return (
+    <div style={{ padding: "20px 24px 24px" }}>
+      <div style={{ display: "flex", alignItems: "center", justifyContent: "space-between", marginBottom: 16 }}>
+        <span style={{ fontSize: 13, color: "#6b7280" }}>단어 <strong style={{ color: "#111" }}>{words.length}개</strong> 준비됨</span>
+        <button onClick={onEdit} style={{ background: "none", border: "1px solid #e5e7eb", borderRadius: 6, padding: "4px 12px", fontSize: 12, color: "#6b7280", cursor: "pointer" }}>✏️ 단어 편집</button>
+      </div>
+      <div style={{ display: "flex", flexDirection: "column", gap: 10 }}>
+        {modes.map(m => (
+          <button key={m.id} onClick={() => onSelect(m.id)} style={{ display: "flex", alignItems: "center", gap: 14, padding: "16px 18px", borderRadius: 12, cursor: "pointer", border: "1.5px solid #e5e7eb", background: "#fafafa", textAlign: "left" }}>
+            <span style={{ fontSize: 24 }}>{m.icon}</span>
+            <div>
+              <div style={{ fontSize: 15, fontWeight: 700, color: "#111" }}>{m.label}</div>
+              <div style={{ fontSize: 12, color: "#9ca3af", marginTop: 2 }}>{m.desc}</div>
+            </div>
+            <span style={{ marginLeft: "auto", color: "#d1d5db", fontSize: 18 }}>›</span>
+          </button>
+        ))}
+      </div>
+    </div>
+  );
+}
+
+function WordBook({ words, onBack }) {
+  const [search, setSearch] = useState("");
+  const filtered = words.filter(w => w.en.toLowerCase().includes(search.toLowerCase()) || w.kr.includes(search));
+  return (
+    <div style={{ padding: "24px" }}>
+      <div style={{ display: "flex", alignItems: "center", gap: 10, marginBottom: 16 }}>
+        <button onClick={onBack} style={{ background: "none", border: "none", fontSize: 20, cursor: "pointer", color: "#6b7280", padding: 0 }}>←</button>
+        <span style={{ fontSize: 16, fontWeight: 700, color: "#111" }}>📖 단어집</span>
+        <span style={{ fontSize: 12, color: "#9ca3af", marginLeft: "auto" }}>{words.length}개</span>
+      </div>
+      <input value={search} onChange={e => setSearch(e.target.value)} placeholder="단어 검색..."
+        style={{ width: "100%", padding: "10px 14px", fontSize: 14, border: "1.5px solid #e5e7eb", borderRadius: 10, background: "#fafafa", outline: "none", marginBottom: 14 }}
+        onFocus={e => e.target.style.borderColor = "#111"} onBlur={e => e.target.style.borderColor = "#e5e7eb"} />
+      <div style={{ display: "grid", gridTemplateColumns: "1fr 1fr", padding: "6px 14px", marginBottom: 4, fontSize: 11, color: "#9ca3af", letterSpacing: 1, textTransform: "uppercase" }}>
+        <span>English</span><span>한국어</span>
+      </div>
+      <div style={{ display: "flex", flexDirection: "column", gap: 2 }}>
+        {filtered.map((w, i) => (
+          <div key={i} style={{ display: "grid", gridTemplateColumns: "1fr 1fr", padding: "11px 14px", borderRadius: 8, background: i % 2 === 0 ? "#fafafa" : "#fff", border: "1px solid #f3f4f6" }}>
+            <span style={{ fontSize: 14, fontWeight: 600, color: "#111" }}>{w.en}</span>
+            <span style={{ fontSize: 14, color: "#374151" }}>{w.kr}</span>
+          </div>
+        ))}
+        {filtered.length === 0 && <p style={{ textAlign: "center", color: "#9ca3af", fontSize: 13, padding: "24px 0" }}>검색 결과 없음</p>}
+      </div>
+    </div>
+  );
+}
+
+function OneByOne({ words, onBack }) {
+  const [questions] = useState(() => generateQuestions(words));
+  const [idx, setIdx] = useState(0);
+  const [phase, setPhase] = useState("question");
+  const [wrongChoice, setWrongChoice] = useState(null);
+  const [score, setScore] = useState({ correct: 0, wrong: 0 });
+  const [done, setDone] = useState(false);
+
+  const q = questions[idx];
+  const total = questions.length;
+
+  function handleSelect(choice) {
+    if (phase !== "question") return;
+    if (choice === q.answer) {
+      setScore(s => ({ ...s, correct: s.correct + 1 }));
+      if (idx + 1 >= total) setDone(true);
+      else { setIdx(i => i + 1); setPhase("question"); setWrongChoice(null); }
+    } else {
+      setWrongChoice(choice);
+      setPhase("wrong");
+      setScore(s => ({ ...s, wrong: s.wrong + 1 }));
+    }
+  }
+
+  function next() {
+    if (idx + 1 >= total) setDone(true);
+    else { setIdx(i => i + 1); setPhase("question"); setWrongChoice(null); }
+  }
+
+  const pct = total > 0 ? Math.round((score.correct / total) * 100) : 0;
+  const grade = pct === 100 ? { label: "완벽해요! 🏆", color: "#16a34a", bg: "#f0fdf4" } : pct >= 80 ? { label: "잘했어요! 🎉", color: "#2563eb", bg: "#eff6ff" } : pct >= 60 ? { label: "괜찮아요 👍", color: "#d97706", bg: "#fffbeb" } : { label: "더 연습해봐요 💪", color: "#dc2626", bg: "#fff5f5" };
+
+  if (done) return (
+    <div style={{ padding: "28px 24px" }}>
+      <div style={{ textAlign: "center", padding: "28px 20px", background: grade.bg, borderRadius: 12, marginBottom: 24, border: `1.5px solid ${grade.color}33` }}>
+        <div style={{ fontSize: 52, fontWeight: 800, color: grade.color, lineHeight: 1 }}>{pct}%</div>
+        <div style={{ fontSize: 15, marginTop: 6, color: "#374151" }}>{score.correct} / {total} 정답</div>
+        <div style={{ fontSize: 18, marginTop: 4, color: grade.color }}>{grade.label}</div>
+      </div>
+      <div style={{ display: "flex", gap: 10 }}>
+        <button onClick={onBack} style={S.btnOutline}>← 뒤로</button>
+        <button onClick={() => { setIdx(0); setPhase("question"); setWrongChoice(null); setScore({ correct: 0, wrong: 0 }); setDone(false); }} style={{ ...S.btnOutline, flex: 1 }}>다시 풀기 🔄</button>
+      </div>
+    </div>
+  );
+
+  return (
+    <div style={{ padding: "24px" }}>
+      <div style={{ display: "flex", alignItems: "center", gap: 10, marginBottom: 16 }}>
+        <button onClick={onBack} style={{ background: "none", border: "none", fontSize: 20, cursor: "pointer", color: "#6b7280", padding: 0 }}>←</button>
+        <div style={{ flex: 1, height: 6, background: "#f3f4f6", borderRadius: 99, overflow: "hidden" }}>
+          <div style={{ height: "100%", width: `${(idx / total) * 100}%`, background: "#111827", borderRadius: 99, transition: "width 0.3s" }} />
+        </div>
+        <span style={{ fontSize: 12, color: "#9ca3af", whiteSpace: "nowrap" }}>{idx + 1} / {total}</span>
+      </div>
+      <div style={{ display: "flex", gap: 8, marginBottom: 20 }}>
+        <span style={{ fontSize: 12, background: "#f0fdf4", color: "#16a34a", border: "1px solid #bbf7d0", borderRadius: 99, padding: "3px 10px" }}>✓ {score.correct}</span>
+        <span style={{ fontSize: 12, background: "#fff5f5", color: "#dc2626", border: "1px solid #fecaca", borderRadius: 99, padding: "3px 10px" }}>✗ {score.wrong}</span>
+      </div>
+      <div style={{ textAlign: "center", padding: "32px 20px", background: "#fafafa", borderRadius: 14, border: "1.5px solid #e5e7eb", marginBottom: 20 }}>
+        <span style={{ fontSize: 11, color: "#9ca3af", background: "#f3f4f6", borderRadius: 4, padding: "2px 8px" }}>{q.hint}</span>
+        <div style={{ fontSize: 26, fontWeight: 800, color: "#111", marginTop: 12 }}>{q.prompt}</div>
+      </div>
+      <div style={{ display: "grid", gridTemplateColumns: "1fr 1fr", gap: 10 }}>
+        {q.choices.map((choice, ci) => {
+          const isWrong = phase === "wrong" && choice === wrongChoice;
+          const isAnswer = phase === "wrong" && choice === q.answer;
+          return (
+            <button key={ci} onClick={() => handleSelect(choice)} style={{ padding: "14px", borderRadius: 12, cursor: phase === "question" ? "pointer" : "default", border: isAnswer ? "2px solid #86efac" : isWrong ? "2px solid #fca5a5" : "1.5px solid #e5e7eb", background: isAnswer ? "#dcfce7" : isWrong ? "#fee2e2" : "#fafafa", color: isAnswer ? "#16a34a" : isWrong ? "#dc2626" : "#374151", fontSize: 14, fontWeight: (isAnswer || isWrong) ? 700 : 400, display: "flex", alignItems: "center", gap: 8, textAlign: "left" }}>
+              <span style={{ opacity: 0.4, fontSize: 13 }}>{LABELS[ci]}</span>{choice}
+              {isAnswer && <span style={{ marginLeft: "auto" }}>✓</span>}
+            </button>
+          );
+        })}
+      </div>
+      {phase === "wrong" && <button onClick={next} style={{ ...S.btnDark, marginTop: 16 }}>다음 문제 →</button>}
+    </div>
+  );
+}
+
+function FullTest({ words, onBack }) {
+  const [questions] = useState(() => generateQuestions(words));
+  const [selected, setSelected] = useState({});
+  const [done, setDone] = useState(false);
+
+  const total = questions.length;
+  const answered = Object.keys(selected).length;
+  const correct = questions.filter(q => selected[q.id] === q.answer).length;
+  const pct = total > 0 ? Math.round((correct / total) * 100) : 0;
+  const grade = pct === 100 ? { label: "완벽해요! 🏆", color: "#16a34a", bg: "#f0fdf4" } : pct >= 80 ? { label: "잘했어요! 🎉", color: "#2563eb", bg: "#eff6ff" } : pct >= 60 ? { label: "괜찮아요 👍", color: "#d97706", bg: "#fffbeb" } : { label: "더 연습해봐요 💪", color: "#dc2626", bg: "#fff5f5" };
+
+  if (done) return (
+    <div style={{ padding: "28px 24px" }}>
+      <div style={{ textAlign: "center", padding: "24px 20px", background: grade.bg, borderRadius: 12, marginBottom: 22, border: `1.5px solid ${grade.color}33` }}>
+        <div style={{ fontSize: 52, fontWeight: 800, color: grade.color, lineHeight: 1 }}>{pct}%</div>
+        <div style={{ fontSize: 15, marginTop: 6, color: "#374151" }}>{correct} / {total} 정답</div>
+        <div style={{ fontSize: 18, marginTop: 4, color: grade.color }}>{grade.label}</div>
+      </div>
+      <div style={{ display: "flex", flexDirection: "column", gap: 10, marginBottom: 20 }}>
+        {questions.map((q, idx) => {
+          const userChoice = selected[q.id];
+          const isCorrect = userChoice === q.answer;
+          return (
+            <div key={q.id} style={{ borderRadius: 12, overflow: "hidden", border: `1.5px solid ${isCorrect ? "#bbf7d0" : "#fecaca"}`, background: isCorrect ? "#f0fdf4" : "#fff5f5" }}>
+              <div style={{ padding: "10px 14px", display: "flex", alignItems: "center", gap: 8, borderBottom: `1px solid ${isCorrect ? "#bbf7d0" : "#fecaca"}` }}>
+                <span style={{ fontSize: 12, color: "#9ca3af" }}>{idx + 1}.</span>
+                <span style={{ fontSize: 10, color: "#9ca3af", background: "#f3f4f6", borderRadius: 4, padding: "1px 7px" }}>{q.hint}</span>
+                <span style={{ fontSize: 15, fontWeight: 700, color: "#111" }}>{q.prompt}</span>
+                <span style={{ marginLeft: "auto" }}>{isCorrect ? "✅" : "❌"}</span>
+              </div>
+              <div style={{ padding: "10px 14px", display: "grid", gridTemplateColumns: "1fr 1fr", gap: 6 }}>
+                {q.choices.map((choice, ci) => {
+                  const isAns = choice === q.answer;
+                  const isUser = choice === userChoice;
+                  return (
+                    <div key={ci} style={{ padding: "7px 10px", borderRadius: 8, fontSize: 13, background: isAns ? "#dcfce7" : (isUser && !isCorrect) ? "#fee2e2" : "transparent", color: isAns ? "#16a34a" : (isUser && !isCorrect) ? "#dc2626" : "#6b7280", border: isAns ? "1px solid #86efac" : (isUser && !isCorrect) ? "1px solid #fca5a5" : "1px solid #e5e7eb", fontWeight: (isAns || (isUser && !isCorrect)) ? 700 : 400, display: "flex", gap: 6, alignItems: "center" }}>
+                      <span style={{ opacity: 0.4, fontSize: 12 }}>{LABELS[ci]}</span>{choice}
+                      {isAns && <span style={{ marginLeft: "auto" }}>✓</span>}
+                    </div>
+                  );
+                })}
+              </div>
+            </div>
+          );
+        })}
+      </div>
+      <div style={{ display: "flex", gap: 10 }}>
+        <button onClick={onBack} style={S.btnOutline}>← 뒤로</button>
+        <button onClick={() => { setSelected({}); setDone(false); }} style={{ ...S.btnOutline, flex: 1 }}>다시 풀기 🔄</button>
+      </div>
+    </div>
+  );
+
+  return (
+    <div style={{ padding: "24px 24px 28px" }}>
+      <div style={{ display: "flex", alignItems: "center", gap: 10, marginBottom: 20 }}>
+        <button onClick={onBack} style={{ background: "none", border: "none", fontSize: 20, cursor: "pointer", color: "#6b7280", padding: 0 }}>←</button>
+        <span style={{ fontSize: 16, fontWeight: 700, color: "#111" }}>📝 시험지</span>
+        <span style={{ fontSize: 13, color: "#6b7280", marginLeft: "auto" }}><strong style={{ color: "#111" }}>{answered}</strong> / {total}</span>
+      </div>
+      <div style={{ display: "flex", flexDirection: "column", gap: 20 }}>
+        {questions.map((q, idx) => (
+          <div key={q.id}>
+            <div style={{ display: "flex", alignItems: "baseline", gap: 8, marginBottom: 10 }}>
+              <span style={{ fontSize: 13, color: "#9ca3af", minWidth: 22 }}>{idx + 1}.</span>
+              <div>
+                <span style={{ fontSize: 10, color: "#9ca3af", background: "#f3f4f6", borderRadius: 4, padding: "1px 7px", marginRight: 6 }}>{q.hint}</span>
+                <span style={{ fontSize: 17, fontWeight: 700, color: "#111" }}>{q.prompt}</span>
+              </div>
+            </div>
+            <div style={{ display: "grid", gridTemplateColumns: "1fr 1fr", gap: 8, paddingLeft: 30 }}>
+              {q.choices.map((choice, ci) => {
+                const isSel = selected[q.id] === choice;
+                return (
+                  <button key={ci} onClick={() => setSelected(s => ({ ...s, [q.id]: choice }))} style={{ padding: "11px 14px", borderRadius: 10, cursor: "pointer", textAlign: "left", border: isSel ? "2px solid #111" : "1.5px solid #e5e7eb", background: isSel ? "#111" : "#fafafa", color: isSel ? "#fff" : "#374151", fontSize: 14, display: "flex", alignItems: "center", gap: 8, fontWeight: isSel ? 700 : 400 }}>
+                    <span style={{ opacity: 0.45, fontSize: 13 }}>{LABELS[ci]}</span>{choice}
+                  </button>
+                );
+              })}
+            </div>
+          </div>
+        ))}
+      </div>
+      {answered < total && <p style={{ textAlign: "center", fontSize: 12, color: "#f59e0b", marginTop: 20, marginBottom: 4 }}>⚠ {total - answered}문제 아직 선택 안 됨</p>}
+      <button onClick={() => setDone(true)} style={{ ...S.btnDark, marginTop: answered < total ? 8 : 24 }}>채점하기 ✓</button>
+    </div>
+  );
+}
+
+function VocabApp() {
+  const [screen, setScreen] = useState("input");
+  const [inputText, setInputText] = useState("");
+  const [words, setWords] = useState([]);
+  const [inputError, setInputError] = useState("");
+  const [savedText, setSavedText] = useState(null);
+  const [saveStatus, setSaveStatus] = useState("");
+
+  useEffect(() => {
+    const saved = localStorage.getItem(STORAGE_KEY);
+    setSavedText(saved || "");
+    if (saved) setInputText(saved);
+  }, []);
+
+  function saveWords(text) {
+    localStorage.setItem(STORAGE_KEY, text);
+    setSavedText(text);
+    setSaveStatus("saved");
+    setTimeout(() => setSaveStatus(""), 2000);
+  }
+
+  function handleContinue() {
+    const parsed = parseWords(inputText);
+    if (parsed.length < 2) { setInputError("단어를 2개 이상 입력해주세요."); return; }
+    setInputError("");
+    setWords(parsed);
+    saveWords(inputText);
+    setScreen("mode");
+  }
+
+  function handleUseSaved() {
+    const parsed = parseWords(savedText);
+    if (parsed.length < 2) return;
+    setInputText(savedText);
+    setWords(parsed);
+    setScreen("mode");
+  }
+
+  const wordCount = parseWords(inputText).length;
+  const savedCount = savedText ? parseWords(savedText).length : 0;
+  const hasSaved = savedCount >= 2;
+
+  return (
+    <div style={{ minHeight: "100vh", background: "#f5f4f0", display: "flex", flexDirection: "column", alignItems: "center", padding: "40px 16px 60px" }}>
+      <div style={{ textAlign: "center", marginBottom: 28 }}>
+        <div style={{ fontSize: 11, letterSpacing: 6, textTransform: "uppercase", color: "#aaa", marginBottom: 6 }}>Vocabulary</div>
+        <h1 style={{ fontSize: 32, fontWeight: 800, color: "#111", margin: 0, letterSpacing: "-1px" }}>단어 학습</h1>
+        <div style={{ width: 36, height: 3, background: "#111", margin: "10px auto 0", borderRadius: 2 }} />
+      </div>
+
+      <div style={S.card}>
+        {screen === "input" && (
+          <div style={{ padding: "24px" }}>
+            {savedText === null ? (
+              <div style={{ textAlign: "center", padding: "16px 0", color: "#ccc", fontSize: 13 }}>불러오는 중...</div>
+            ) : hasSaved ? (
+              <button onClick={handleUseSaved} style={{ width: "100%", padding: "16px 18px", background: "linear-gradient(135deg, #1e293b 0%, #334155 100%)", color: "#fff", border: "none", borderRadius: 12, cursor: "pointer", display: "flex", alignItems: "center", gap: 12, marginBottom: 16, textAlign: "left" }}>
+                <span style={{ fontSize: 24 }}>⚡</span>
+                <div style={{ flex: 1 }}>
+                  <div style={{ fontSize: 15, fontWeight: 700 }}>저장된 단어로 바로 시작</div>
+                  <div style={{ fontSize: 12, opacity: 0.7, marginTop: 2 }}>단어 {savedCount}개 저장됨</div>
+                </div>
+                <span style={{ fontSize: 20, opacity: 0.6 }}>›</span>
+              </button>
+            ) : null}
+
+            {hasSaved && (
+              <div style={{ display: "flex", alignItems: "center", gap: 10, marginBottom: 14 }}>
+                <div style={{ flex: 1, height: 1, background: "#e5e7eb" }} />
+                <span style={{ fontSize: 11, color: "#9ca3af" }}>또는 새로 입력</span>
+                <div style={{ flex: 1, height: 1, background: "#e5e7eb" }} />
+              </div>
+            )}
+
+            <p style={{ fontSize: 13, color: "#6b7280", margin: "0 0 10px", lineHeight: 1.7 }}>번호+영어 → 다음 줄에 한국어 형식으로 입력하세요.</p>
+            <textarea value={inputText} onChange={e => setInputText(e.target.value)} placeholder={PLACEHOLDER} rows={10}
+              style={{ width: "100%", padding: "14px 16px", fontSize: 15, border: "1.5px solid #d1d5db", borderRadius: 10, background: "#fafafa", color: "#111", resize: "vertical", outline: "none", lineHeight: 1.9 }}
+              onFocus={e => e.target.style.borderColor = "#111"} onBlur={e => e.target.style.borderColor = "#d1d5db"} />
+            {inputText.trim() && (
+              <p style={{ fontSize: 12, color: wordCount >= 2 ? "#16a34a" : "#f59e0b", margin: "6px 0 0" }}>
+                {wordCount >= 2 ? `✓ 단어 ${wordCount}개 인식됨` : `⚠ 단어 ${wordCount}개 — 2개 이상 필요`}
+              </p>
+            )}
+            {inputError && <p style={{ color: "#dc2626", fontSize: 13, margin: "6px 0 0" }}>{inputError}</p>}
+            <button onClick={handleContinue} style={{ ...S.btnDark, marginTop: 14 }}>계속하기 →</button>
+            {saveStatus === "saved" && <p style={{ textAlign: "center", fontSize: 11, color: "#16a34a", margin: "8px 0 0" }}>💾 저장됐어요</p>}
+          </div>
+        )}
+
+        {screen === "mode" && <ModeSelector words={words} onSelect={setScreen} onEdit={() => setScreen("input")} />}
+        {screen === "wordbook" && <WordBook words={words} onBack={() => setScreen("mode")} />}
+        {screen === "one" && <OneByOne words={words} onBack={() => setScreen("mode")} />}
+        {screen === "test" && <FullTest words={words} onBack={() => setScreen("mode")} />}
+      </div>
+      <p style={{ fontSize: 11, color: "#ccc", marginTop: 20 }}>단어집 · 한 문제씩 · 시험지 · 자동저장</p>
+    </div>
+  );
+}
+
+ReactDOM.createRoot(document.getElementById("root")).render(<VocabApp />);
+</script>
+</body>
+</html>
