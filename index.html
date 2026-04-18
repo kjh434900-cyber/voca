@@ -1,0 +1,828 @@
+<!DOCTYPE html>
+<html lang="ko">
+<head>
+<meta charset="UTF-8"/>
+<meta name="viewport" content="width=device-width, initial-scale=1.0"/>
+<title>단어 학습</title>
+<link rel="manifest" href="data:application/json;base64,eyJuYW1lIjogIlRPQ0EiLCAic2hvcnRfbmFtZSI6ICJUT0NBIiwgImRlc2NyaXB0aW9uIjogIlx1YjJlOFx1YzViNCBcdWQ1NTlcdWMyYjUgXHVjNTcxIiwgInN0YXJ0X3VybCI6ICIuIiwgImRpc3BsYXkiOiAic3RhbmRhbG9uZSIsICJiYWNrZ3JvdW5kX2NvbG9yIjogIiNmZjNjMzIiLCAidGhlbWVfY29sb3IiOiAiI2ZmM2MzMiIsICJpY29ucyI6IFt7InNyYyI6ICJkYXRhOmltYWdlL3BuZztiYXNlNjQsaVZCT1J3MEtHZ29BQUFBTlNVaEVVZ0FBQU1BQUFBREFDQVlBQUFCUzNHd0hBQUFjQ0VsRVFWUjRuTzJkYmF3azExbWduL2VjVXhPYm1iRnhzQk43bzJXenM4a0dqMUU4dnRmQmNlYU8yOFJFSzBTSVphMHV3ZmczRW9rREs0UkFtejk3ZGZkUGRoZEZrU0EyaS9qdFpFa0xSWUVnaEV6QzNIZ21pVVh1Wkl6aUFTdTdKZ3ZLMnNZZmsva2l6blRWZWZkSGRmV3Q3dHZWM2RXM3FxdXF1eDZwWmQrZTZ2bzQ1N3puNDZsVHA0UUZveUJzSVp6dUdIWjJJZ0VkL052bXB1WDdMejZBNEJEL0N4ajdEbnprUVI1RTVHMm9LaUNMUHVlV1hDZ2lndW8vZzU3R1dJT1B2bythUDBjSmVjZXhyMG0zRysxdGpORHBXQjdjOFd5ajZmS3dDQlpXbUJTRXpVMlR2bmdBdmYvZW44Ym9oeEh1d1hBM3luc1E2WjlaLy9TOEIxMW91clFjRkJFd3B2K0h4c1ZhRllRWDhEeUg4bTI4ZkZtKzhhM3ZwSCttbTV1V2J0Y3ZLaEJLRDRCeEJWODM3bnN2eHY4ODZoOUI5VDRDRnllT1YvQmVBZTNYOXYyekZMT0ljMjBwRkVYVkQvNFNFVUF3UmpBU0IwZ3ZCSkZuRWZORnZQa0xPZlBzM3c1K3ZLQkFLTFZRNmVhbVRRcStubHEvQXpFL2kvcGZCNzBYNnh6cUlmS2dHZ0xTVHlRemVhL0xSZDdjWFlKYXdQY3JOMFhFWVEySWdTZ01RYjZGbU45SC9WL0xNN3N2d1hBWktvTlMwak1kdmRwWnZ4WFBKMUFleDVsYis3Vjh2OUNMSU5neXpxR2xJU2dSYUJ3TXhvQVJDUDFyQ0U5ZytLenM3TDZXMVgwdWdrSURZUFJFOVlIMTN3RDVKRVp1Si9MZ2ZkUXY5Rkwwc1p1SUFtK2l6REt5VDdhNW9aOTRTNGpHU2FHS01SWnJ3T3ZMb0orU3IrMytIcFRUTFNvc0xZZTZPeWZYZmdranY0bVI5L2RyL0JBUlcrVHhta3hTbU45RTJlSkhYRU94Wk9lcUFCRndHR0didDNBRE1sUFFOQmhGTmNJWWh4SHcrazI4ZmtiT252c0NGTnN0S2lRTmRYMDlrTjNkWHR6UDUzY3g1akZVSVl6OFlQRFRNaUFwdkQ5RStXM2U1QXFLWTNJQWhNQlJoTi9sQm01Yy9nQklpR1dJc3dZUjhQNHBsTitXWjNaZlNzcmNRUTl3b0FHbmdpaUk3TzcyZE9ORUIzZ2FheCtqRjRiOXd0L2FteWxZd00zNFdjSEJraUJpQ0NOUEx3eXg5akhnYWQwNDBaSGQzVjVTL2c1eWdMa0RRRGV4Yk1VSDE0MzFqMkhjYVVUdTRub3ZSTVQxQzM5TEh5MzVzOVNJR0VSY3YyemRoWEduZFdQOVl3QnNJYm81Zjkwd1Z5R04rMkJFc28zbjFOcm5DTnlUZUI4UlJSNFJOKy9KTERPUytpVE40ank1bGd5a2tuMnNWUDlTeEJGRkh1OGpBdmNrcDlZK0o5dDQ2UkxwNXVaY1FaQzdzR3FuNDZUYkRmWDk5N3lMUSthL1lleC9wSGU5QitMNi9mMldFVVp0VDNvTWtLZjJWdUFhaWsvdFl3WHMwREJ4ejBMcFhlL2hnbC9XQjlZRHJ2di9MTjN1LzlaT3g4bk9UcGhyZDNrMlRrYmZldkx1dXpEdUsxajdkbnI5TGsvTFBtYXhQVy9tQ0lLa29LZi9YakU3Tkl4cVNCQTRvdWdWZlBpUW5IM3UrYnlHYU9ZdWtHNXRHZWwySTczdm5qdXh3ZE9JdElWL1JwS2Erd3JLMWRUbjJwd3RRSG9mVitiWXo5SWc0dnBsOE8zWTRHbTk3NTQ3cGR1TmRHdHI1bkk5MDRhNnVXblozbFk5dWY2VEhESmZCZTRnaXFLMjhNL09PTnN6N3hpZ3RVTXA0bkZCQk56QklmTlZQYm4razJ4djY2eGpncWtCb0NBY1B4NVhNS0tmeGRyYmlhTGt4dGJLVXBXOWFhM1JHRVFzVVJSaTdlMklmaGFBNDhkMUZrVTZ2UVhZM0RSc2I4T3B0YWR3N2hmYmJrK002UFNQNmYvWHpiRHRRVDl1NUpqVFBrdEgwaDF5N2hjNXRmWVUyOXR4MlozQ3hJS3M2K3VCZExzOS9jQ0pqeEVFai9LajZ6MUVndUxPdXBrb2NNM3ExSjczWUJBc0VKcDR3SnFZbXlKSUJzRWhjTWtyTitoczg0b0U0YkJmUW1zVUIwR1B0eHg2bEErY2VFYTYzVCtZZHNjNE13MEd4bWRqL1NSR2R2RHFRZDJrM3l3N1NseDdYcldlanh4N2pSOVlKZEFwQlZvQkF6Y2VPd0syaE5udEFrVEtEMSs4Q3A2SnVTTkFUK0RISStGUFg3eVZJNUZCWmVreVZFRkNqQmk4ZHVUTTd0bEpabWhzQzZCZ09INWM5ZFQ2SFNoL0JGalVTK3Y1WXhTNFpKV0wxbk5JNDNJM0RnRlV3VmdoT0FReWFjYmJ2QWhvQkplYzRpTkZKc1NZQWE0TENHYjV4Z0Y3Q09vdFdBUDhrWjVhZjRqangxL1JlS0wxdnF3YTMwZnFkSXhzYjN1OGZwckEzdGtmOUxaVEcxSTRoVUQzL2p2dWs5NW1FV09BUE9lejFJZ1lvaWdrc0hmaTlkT3l2ZTNwZE1hVzMzMWY2dWFtWldjbjBsUHJEeFBZUjduZTY2M0NvRGVQUVpubjA1Ny9nb25uRHZVSTdLTjZhdjFoZG5iR1RwY1lHeFVDaXZmL0JaLzBZSmVmdkZhbmRpVW81L21zaURVeStMZ3NaL1VNaDJyMnZha09hNC9qN0JwaEdLMkM3MWR5V0IyRnExYkJDbUpsZXVGUUVGdiswR2x3akNtRFlPbXZ0bkhKS2hGK3BrRndZNjJSaUNVS0k1eGIwNU5yajB1Mys4VG9nSGdRQU5xLzRhVWJKMjREL1JUZTY3TDMrNU1DZlMydjFiRnc2RjJIZVZzT3F5T21wUFVOTk43M0xjZU96SGdpUUtROHpHdDdYbmJDcG8yM1JpSW1Mc3Y2S2QwNDhRV09IMzlkMlhNRmV5MUFwMk5sZXp2VWpiV1A0OXpSVmJyaHBlUzNPcmYxVzRDWkMzWEozWWlaV3huWnUxN1BTbGdqd2Z1UUlEaEtHSDVjdHJlM3RkTng5R2VOT29nckVkblpDWFhqeEcySVBONmYxNy8wWFo4MGFVTXlyUVdRT280UTg1eEhjcDFUZnBQY3RHdThOWXFuU25oRUh0ZU5FMC9LenM2clNTc1FkM0U2blg1aGw0ZXc1amE4bjNKTHBibXNyQlVaWWNYU1FmRGVZODF0SUE4Qmd6SWZCOERPanRmTlRZdnFiOFYzRTVmM2hsZGpyRTdaRkdTTkdvT0l4RThTNlcvMVZiK0grTHJpaFNkZSt1NXh4SjZJRjZOZHpobTJvN2FuemxhbmJJcXdSZzJ6UXhZZmVjU2U0S1h2dmtmZ2dvSnhkRG9tamdaNUJHZVRCd3lXeXY1TXREMTFzenBsVTRBMWFxd2RVdlVFemhINlI0QUxkRHJHOGVDRFhzRVJYWG9FNzJHSmIzeU4yaDZsdmxhbmJBNWlqWVRHMmlFVGwzRjlSRHVkLzg2REQvcDR6ZzhYZndveGEzalBzdFgrbzZSdHo5RGNtSFlNTUhVTU1EYmRta1I4VHdERXJNSEZuNUx0YlI5Ny9pajRFSUVWZXIwZUxNZDhmeDN6L3hQTDhUSVY3cUxSL1VrenJVNm9iM2RJZTdnZ29DY2ZBcjZUM09pNkgxWFE1VmxiSXkyeWt2OXpTZnM5ZW8yR2VOaGZ4blRscHBPa2xXSDRlWU4rT2pxSlo4bnY4NFoxZmFHSkl2MXp1eC80ak5OT3h4RmVlUjllbDZiN284QzFNQnFxK1VYaHFucjB1b0xWNFdZaEJQMFhYODRESzAxSFFDT0ZOelYrZ1lrTWYzOHBqSWdpSGJGRGNOaWFldGFsSWdhdm9Qbys3WFNjNlAzdi9TQXUrRXRVRFEwZkFDdHh6WDgxalBqSTM3M0lEOEtJUUdTb3JGOHpZNmE4U2QvcXRHU2lYdmRWRGdKREdsU0FuaW8vN2l4L2V1Y3hqamlMcXRZeEVEd2luckQzSHh3aThjc0owcSt6YVRnS1hBb2pMb1lSaC9vQm9OQmZqbkJNZGlpczZNbzYrUmhKT2dVdTllZk1KejNMNi8wQ1gvdlVqTmV2VlljeEQ4ZXpJbFQzZCtTYWl4TWhFTUdsV2dESXlKaVZXbUJ6VGpKS3RCdFpxVTdwajdYcVRGTFdqWG5ZQWUrcytueG1JYXRHeVp2VTJhc0E1TnhSeTBRYVlvZmU2WUJyVlovRkxHUk9UMHEvVERMMWRhanhweEhOOFpJZzdLWDd3QTZOYmxRdk8zVE5nZnhjM1crQWpWcWRCQUZ1Tkh1Sm5QUkZGZVdvRlNLVm9VRndTN2tJMEFPT1dPRnlHQkhCMENDNE5uWW91U0dHL0p6b3FYV3RXVlFPeUxJNkVOY3lSNjN3eExGYk9HcGxVTnREWE1sYzg3NHQrQXRHaVI4d3VlcVYzL20vbDdnYUthNmZLYlcwUXlLNC9qdGJLeitYU1l4YUhZQ2VnbGNoVkNWU2lJWVZOVWVYWU1abTA0Z0h3RUFFbDhPSVM1RVM5TE9obG5aSXRUa3J2YVd0VHZxN1JPQ01pcHl3VmltOUdpUkpub3dCQW1IUUF0VFVEbFgzekc5UlZpZUwyaVgxaWpETktOZk5EbFVXQUFleE91bS9OZldaN2Joem5XNUxUcEw4R2YyN2JuYW9rZ0E0cU5XQnZVR3dzd1pyNC9sTnM1VHQrSEhubGpKSmo4RUdnMkRxYVlkRU45WVdGbnBGV2gxVmNOYnc3OTkxQjlhYTZhTXJBUjk1L3VuRmwvc0xCSlJ3Z1MxQW5CVS85SHVUUytwc2h5cHJBUTVxZFZUQjlsc0FtVEVBMmpLL0dFYnpxODUycUxJeHdFR3RUcnJ2UDFpblp3bzF2ZDJ4bEtUenE4NTJxUFFBR0RjUmJaNXlPQzZKMmhxOXZvem1UVjN0VU9rQnNPL0pySDZ0bjJWMXNoaXR2Zk9ZbjViNlVEYzdWR29Bak5xZVpCQjhMWXc0WW9VSUlXQjRFSndWOGRZT1QxV0t4d0MxbmI3VU1vWTYycUZTQWlCZDBNZlpuaU5XK0IvLzVtYU9HQ0ZrZUxCN281R2hBWEJTMFAvMXNkc3hZd2E3eHN3d0FHNnBGQ0dXR2plYTJQS05zME1mZmVFZktyRkRwYmNBV2JibmlCVnVHdEdkRUNmVU9HeVc3V2tMZjJPb294MHFmUXlRWlh1U3Z0OW9BR1JGZVI3YjAxSmY2bWFIQ2d1QXZMWW5TM2UyTERkMXMwT0ZCVUJsdG1mV2xKQjJIbENkcWNvT0ZSSUFWZHFlZURIckdaQWMyN1lzbENydDBJSG1BazJiMnpQTjlxUXZZQ2JiTTNUbTg4M3RhU2ZEMVk4cTV3NFYxZ0pVWlh1aXlPY0tnTFliVkQrcXRFT0ZqUUdxc2owaWU1K1c1bEtWSGNvZEFLM3RhU21EcXV4UTdnQW95dlprNzUvWnJxS3Q5VmVDc3UxUXJnQW8wdlprRVVVK1hxRjMyblcwVm1mcFdZUWRtc2tDRldsN3BySFA5a3lodFRyTHl5THNVTzRXb0NqYmswV1VzMVp2dTBITHl5THNVTzR4UUZHMko0dTJRTGVrS2RzT1pRWkEwMjFQM3BxZ0R1ZGNCazFQaDdMdFVHWUFsRzE3eXNibHpNbThYYldtc0t6cFVKUWRHaHNBaTdBOVphTEFsV2oyZDc3TU0xaHZBc3VhRGtYYW9TRUx0RWpiVXdiSklPbEtwRHorNGtXdTlDMUJWZ0VRSnE5SDFGU1dQUjJLdEVPWkxVRFp0cWRNa3Bydjhvd1puL3htMlZqV2RDalNEbVdPQWNxMlBXWGpaTzh6S2VPVGJaZVZaVTJIb3V6UTBOdnVtMjU3aGd4QTFrdXh4NUY2aytSQjU1WlV4YXFsUTFGMnlDMlQ3VW1hUWdlRXZSNjkvdklTV2JmV0RISFhMdlNDUysycnJsMjdTYlRwRUpQWERya3JZVFQ0byttMlp6QVlVcmpwclcvRitPbE5mNmh3eE1TL0lkUmFEdTZuMGFaRFRGNDdCQ0R2TzNwRTB6dG9zdTFCaEY3WTQrWmIzc29mZi9OWkR0OTBVLytWc09QUE9QbTNhNWN2ODlIMzM4ZWxpMjhRdUFCVUcyRkYyblFZWmxZN2xLNEkzTVZVQzVBMGhVMjFQUWowUXNYMmE3NGZPM3g0cHYxWTU3aXFjRGxVQXRGQnhpZkhxRHR0T3NUTWFvZlNYVUVYakk0QmFLN3RRVUJUZlY5Vm5hbm1DM3U5UWQ4MzNaZHVraFZwMHlGbUZqczAxQUtNUm5ZeVVxNmI3Y2xpZEhRL09QLytvQWVHcDNWb3hpM3hyUDAwaFRZZFlyTHNrTEwvMnFEQzl3TlV4WkQxNnYrL0M0S3FUcWN5Mm5TSVdha0FVRld1WGJreXFQMlNwdi9xNWN1Wk5lSXkwcWJESGlzUkFBUExjZVVLSC9tWm4rRUhiN3hCRUFSREJlRGFsU3M0NStyeEJ2T1NhTk5oUHlzUkFBbXF5cVUzM3VEaTY2OXpxSi94eVhqSHV0VkppallkOWxpdHF5WHU1d1pCZ0V2VmZKQTlLRnhXMm5TSVdkb0FTTlRmYU9hT2ZwYWROaDBtczdRQjRJSmdTQUVtMzYwYWJUcE1aaWtESU9ualJtRTRxTjFXMFhLMDZUQ2RwUW9BVmNVNU43QWNvM2MrUnkzSHN0S213K3dzVlFBa0pEVmZZamFBbGJRY2JUcE1aMmxUSWF1ZnUybzFYcHNPazJsOEFHVE9WOHJJNEprZWpNcmFaNDFwMDJFK0doOEE2U2VBaXFyVGt1Y2k2dmdFWEJadE9zeEhvd05nOUFtZ29qTytiay9BWmRHbXcvdzBNZ0NFOFc4ZUwrTTRvMit1cnhOdE9oeWNSZ1pBd3VnVFFHVlFweWZnc21qVFlYNGFIUUJRZnYrMEtUVmVtdzd6MGZnQVdOYU15VXViRHZOUnV3REl5c2dsYllFYlQ5UHpxM1lCRUdWNGE5TytPYU9XTkQyL2FoTUFzZEZRWHJ4NGxTajFOSklDVm9SanR4ekI5cGZ1YTZtZVpjbXYyZ1JBUXFTNkwwRmI2a3ZUODZ0MkFURHU5bnN6R3RQVnBPbjVWYnNBS0p1c0dxcEptWmFIVmJ2ZXZGUVdBRmtMR0UzYWZ0eS81MjF5czFZNVc5b2JQUVZkYjFYNVZUYVZCY0NvUFpBeDM0M2JmblNMUExZaFdVTnpkQi9KcmY1bHF4V0x2TjRxOG1zUkxEd0FzdXhCZ2g5ZHZyci8zWXNYcnc1dGw4YzJKSXVrN2x0Rm1XYTlHMnRXaXJ6ZUt2SnJrVlRhQW94TDBLek1HSzF0NWtuQXBFYThQRklnNXQxZjNTbnllcXZJcjBWUTZSZ2d6OE1XNDdhYnA2WWVXa1U1OWQyeVV0VDFWcFZmWmVOR202L2tNMjRsM1dTYkpxQWovei91ay9WdmFkcnJiUlpaNlpBVndLNlhhcW9HNzRyUzRWb2ovYU9pYk1tNHhCODkxdWoycy93K1lldzdzeWJrYnRuWFd6WmxYMi9aK1ZVVVdla1FxcEtVOWFFWFpOemk3T0NQNUFtZ0kxYTRHaWtvcGIwaXlTWnIxbzk4N3pQTWdoMWQybVBNZCtsLzIvZk9MTWwrYTNxeVBReS9FS1FwZG1nUjExdG1maFhGMkhRZ2ZrWFNUYzVpWlA4cmt1VHkvU2MwdllQa0pYa2ZmZUVmdUJSRisxNlNWNVF0R1UyNGVlZVdwTFZhbHYxSUowajZIVkxwWTZjelBxa0k2bTZIRm5tOVplUlhVVXl5WGoyVW02M2xqOS96YnprODdrM3hSMU10UUh4bGdnV3VSdHAvVjFUOGRkRzJaTFEybUpZc1ZtUnNnazZxNGNhOUlYM2NnMVBwR2pFNWx5YlpvVVZjYjVuNVZSVGpyRmRQRlV2Y0F2eVlzL3RXeVhCRGk2YVNKSWFXYmt1eUN1Nms3ZlAwSTdQZWtKNzErL1MxeVpqdjZrN1oxMXQyZmhYRmFMbE5Xb2N3dFJDd2pHdy94RFRWdGF6Mm9LVlpaTm1lTE5MbGVpZ0FzbjZRakpxVGphdXlRL1BXSWxucjVHUTlPNTUrcGpicEVqUnBQWnlxcnJlby9NckxMTFlINGk1UU9HSEt4dGdBRU9CbVoxRWdlWTFxVlhab0huc2dqRjhuWjlLZ01MMzJUWHBRMklTV3JjcnJMU0svOGpLcjdZRTRBRzUyTnZPNlJEZlc5b1dIQXRjaVAzU0FxdXhRUXQ1SmIvdmVHSjVoQ1NhZGY1TTBhRlhYVzBSK3pjcTh0a2VBdzlhTXZhN01GdUJJVGV4UVFwNzlwMnZFNUxmanVtMmoyOTgwSm9DYmNDT3N5dXN0SXIveU1vL3R5Vm9qTlhNTVVDYzdOQTlaYnd5ZnRIM3lTVjlPM1d2L2hLcXV0NnI2SWEvdHlicXV6QUJvdWgzS092LzBKK3Y3cGhUNk5NdDZ2VVhabml4eXp3YXR5ZzRWeGFqdGFKcnR5VXZUcjdjbzI1TzUvendiVjJtSGltRFVsa0N6YkU5ZW1uNjlSZHFlTE1aYW9Fa25WSlVkS29KSldyQk9nVm9VVGIzZU1teFBGcmxiZ0tyc1VCR00ycEkwZGV1cUZVSFRyN2RJMjVORjdqRkFWWGFvS0xMNnZ6VTgxVUpvK3ZVV1pYc3k5NS8zaEpiTkRpMDdUYm5lc20xUEZvVTlFOXgwTzlSU0xXWGJuc3pqRnJHVHB0dWhsbXBaaE8zSklwY0Z5cUxwZHFpbEdoWnBlN0lvckFWb3NoMXFxWlpGMko0c0Noc0ROTjBPdFZSTDJiWW44N2dGN2FmeGRxaGxNVlJsZTdJb2ZXVzQxZzYxcEtuSzltU2VUNWs3YisxUVM1b3FiVThXaFZpZ0xGbzcxQUwxc0QxWmxONEN0SGFvSmFGSzI1TkY2V09BMWc2MXBLbks5bVNlVDhuN0w4d096YnIvbHNVeVN6N1Z3ZlprVWRuN0FmTGFvU3hhYTFRdHM3VGFkYkE5V1ZRU0FIbnQwS1Q5dE5hb09rYXR6cVR0cXJZOVdaUnFnYktZMVE1bG5WZzhqbWl0VVZWa1daMUorVlcxN2NtaXNoWmdGanMwTFFDZ3RVWlZNbXAxSmdaQXhiWW5pOHJHQUxQWW9Va0pDcTAxcWdPejVsZlZ0aWVMeHJ3b080dTgxbWpXODFsMkRwSmVCMG56cW14UEZvNjlDcmdXcE8yUXo5aG1sbmVaNVdYVmJOSkJXczhzcXpNNXY2cTFQUm1vUTBTcTZuK05NbXFIcG8wQjhscWpTY2RkSlpzMHE3Mlo5UHRwNzk1S2s0d0JxclE5WXhFUjBZMjFWeEI1Vzc5VFh1bjVqZHFoU2R2bHNVWlpySnBOeW10dnNwaG1kU2I5cmlyYk00TDJLLzUvZHFCL2hiRy9RaGg2Uk96MDM1YkhXRHVVdWZIczFtalM4VmJSSnMxcWI3S1l5ZXBrSHJ3R0thM3FzZFlTaFgvbGdNTlZuMDhhblNHQjhscWpMRmJaSmgwMDNhWlpuVW0vclJHSEhmQzlxczhpemF3Sk5LODF5cUlvbTFSbnlyakd1bG1kbkh6UDRmMlhNUHFma0pMZmExTVNzMWlqTE1xd1NYVW1yNzNKb3NaV1p6WVM4ZVA5bHh5cWdtcElmRjJOWWxack5PbjNSZHFrdXBQWDNtUlJXNnVUQjlVUVZSSHRkQnpobGU5aXpUdngzdE9nUUpqVkdrMzZmUkUycVNuTWEyOG03YThtVmljUEhtTU1rZjhlN3VpN25lenNoTHF4L2pjWWVTZVJla1FhRXdDNXJGSG1UZzV1azVyQ2dleE5GazNyQnFsNmpCaTgvSTNzN0lUSlZJaHZJTExaeE1wdkZtdVUrVnVLc1VsTjRTRDJadEkrRzRXZ3hNUGRiMEF5RjhqMm5vNUhOQkpVZUdwemNkQU1LTm9tTllXRzI1c0RJQUZocU5qd2FRQ25XMXVHMDZmL0hyMTBEdVBXaWFKR2RZT0s0aUEycVNrMDN0NGNsUGdHbU1HSDUrQ1d2OWV0TGVNNGZkckU0NEI3dm9neGNRQTBhQ0JjQkFlMVNVMWhLZXpOd1lnSHdGNitLRHM3c2YxV01BSmVOMDRjQi9zY3FHSEZBdUNnTnFscE5OVGVGSUVIOFJEZExXZk9YMUF3VHNBckdPNTQ5d3Y4disrZXh3YjM0cU1JcUhSZTBDSXB4Q1kxamRYckJrVVlhNGw2NS9oWDczNUJPVzhFZkZ6VGR6cEd1dDBJa1U5ak9KaGFhU2lhc2lLcjhGazVWQlVEaUh4YXV0MklUc2RBWHdBb2lJRHF4b25iRVBzODhCT29ycW9nYVZrK0ZCRUZYa2VqdStUTStWZVRNcDlFZ1dxbjQrVE0rVmRSZlFKckRhcFJ4U2ZkMGxJTXFsRy9URDhoWjg2L3FwM080SGJQb0laWEVMYTJoSzk4NlNkQS9nOWlqdlQ3aVcwcjBOSms0aHRmNnErQy9qc2VldmgxdHJjMUNZQ0I3UkZRTGx5UXVCV1FUMktNb0xxc1NyeGxWVkQxY1ZtV1Q4cVo4Njl5NFlLa2IvYnZxOTExYzlOS3R4dnB5WHQyc2U0ZW91cWZGR3RwbVF2VkNPc01VZmh0T2Z2dDlhUnNwemNaNi9zVkJHUCtLMmFwYjR5MkxEOGVFNWZsckVlOXgzNnBuVTQ4Uy9UazJ1YzQ1QjdsZWk5RXBMSTFoRnBhY3FNYWNpaHdYQTgvTDJmUC9VcFNwa2MzR3g4QVlOamFncTkrK2Uwb1g4SEluYXM2UjZpbGdRem0vT2pmSVR6RUJ6LzhDdHZieUpqZXpOZ0NMZUM1Y0VIa21kMlhnRjhGSXNSRUxPOU00WmJsUWZ0bE5RSitWWjdaZmFrLzhCM2JsWitvT0hWOVBaRGQzWjUrNE1USHVPRXRUL0tqNnoya2VWT21XMVlJMVI1dk9SVHc1bzgrTGw4Ly93ZEpHYzdhZkdLWFJuWjNlN3E1YWZuNitUK2sxL3M4UVJEMG54OXVhYWtmcWlGQkVORHJmWjZ2bi85RDNkeTBrd28vekRMcnM5djFiRzNCTStjZUl3ei9qQ0J3YlJDMDFJNjQ4RHZDOE05NDV0eGpiRzNGWlhjS1V3TWd1VUVXSDBRK1FSUzlqTFd1blNyUlVodmlxUTZPS0hvWmxVOEFqTjd3eW1JbXF5UGRic1RXbHNqWjNYL2t1djhnOEJMVzJyWWxhS2tjMVJCckxmQVMxLzBINWV6dVA3SzFKYU0zdkxMSU5jOW43eTd4M1hkaDNGZXc5dTMwMm5zRUxSV1JkSHVpNkJWOCtKQ2NmZTc1Y1hkN0o1SEw2MHUzRzJtbjQrVHNjOC9UOHh2NDZFOElBZ2ZhbzFXa0xZdERRWHNFZ2NOSGYwTFBiOGpaNTU3WFRzZmxLZnd3NTB6UGRKVHBxYlhQNDRKZnB0ZUxVSlgyWmxsTHFhaDZSSlFnc0lTOS95WFBuSHNVaHN0a0h1YWU2cXliV0k2amJLTnNyUDhhUnA0RUlJcmFMbEZMT2NUOS9iaHNlZjA0WjNiL0oxc0lGeERwTXBlVU9kQmMvMlNDVWY5cHNnNWluOERadTdqZWk5Y2FiVnVEbGlLSXArVjdEZ1dPTUhvZWpSNlhNK2QzMHVWdjNsMGZxSUFLcUlEcStub2daODd2QUI4aWlwNGljQTVuVGYvRTI3RkJ5N3dvcWg1bkRZRnpSTkZUd0lma3pQa2RYVjhQa3ZKM2tBTVU5clRYMExqZzVOb3ZZZVEzTWZKK3ZJTDNZZitaZ3ZicHNwWlpVRlFqakhIOVJYdStpZGZQeU5selg0RDUrL3ZqS0xSQUtnaWJtMllRQ0Ercy93YklKekZ5TzVFSDd5TVFRVloyUmNLV2JCUkZRUlZqTE5hQTE1ZEJQeVZmMi8wOWlBcyszYTR2Y3ZuV1VncGgra1MxczM0cm5rK2dQSTR6dC9aYmhIaEFFd2REKzdUWktxTkVvSXFJdzVoNG1iYlF2NGJ3QkliUHlzN3VhNk1WYTVHVVdnc1A2OUwxT3hEenM2ai9kZEI3c2M2aEhxSWtHSkQrVzJyYWdmTnk0L3NMRThXRjNob1FBMUVZZ253TE1iK1Arci91VDhVdnRMc3pqdEs3SWVPaVZ6ZnVleS9HL3p6cUgwSDFQZ0lYcjFRV3R3NXg0cVJYYjRwdFV0dGxhaFk2dEtoQ1hMa0p4Z2hHNGxWNWVpR0lQSXVZTCtMTlg4aVpaLzkyOE9NU3VqdmpXRmloeW1yRzlQNTdmeHFqSDBhNEI4UGRLTzlCWkU5d1FkSmxXdFNwdGhTQkNKaWtNZGYrMi9rVWhCZndQSWZ5YmJ4OFdiN3hyZStrZjdhb2dqODR6VVVjSkUyOC9oREM2WTVoWnlkS1g2aHVibHErLytJRENBN3h2NEN4NzhCSEh1VEJ1cnpNdTJVcWc1ZFFnNTdHV0lPUHZvK2FQMGNKZWNleHJ3MzFCa0RvZEN3UDduaTJENjQxOC9ML0FkaTczUklaUEFVdUFBQUFBRWxGVGtTdVFtQ0MiLCAic2l6ZXMiOiAiMTkyeDE5MiIsICJ0eXBlIjogImltYWdlL3BuZyJ9LCB7InNyYyI6ICJkYXRhOmltYWdlL3BuZztiYXNlNjQsaVZCT1J3MEtHZ29BQUFBTlNVaEVVZ0FBQWdBQUFBSUFDQVlBQUFEMGVOVDZBQUFQVDBsRVFWUjRuTzNkb1hyanhoN0dZWG1mb0JhVWhKU1VsTWpVT0plUTIraFY5VFp5Q1l0TkxWSlNVaEpTMEVOMVFKODg5YmJacksyUk5CcDk3NHNPMFhveTlzbi81NUZUSHpxYU5ENmR4dHByQU9pNnJqdDhQaDlxcjRIN2VkSTJ5b0FIOWtJZ2JKTW5wVEtESGtnbERPcXkrU3N6OEFIZUp3aldaYk1YWnVBRFRDTUlsbVZ6RjJEb0E4eExETXpQaHM3RTBBZFloeGlZaDAwc1lPZ0QxQ1VHcHJOeGR6TDBBYlpKRE56SFp0M0k0QWRvZ3hDNGpVMzZnS0VQMERZeDhIVTI1aDBHUDhDK0NJSC9zaUZYREg2QWZSTUMvN0FSbmNFUGtFWUloQWVBd1ErUUxUa0VQdFZlUUMyR1B3REpzeUN1ZkpLZmJQaTNYN3IvVlgzOFg3dnZxajQrWEVzN0RYaW92WUMxR1B3QWZPUnRUcVNFd080RHdPQUg0QjRwSWJEcnp3QVkvZ0JNdGZjWnNzc1RnTDAvYVFDc1k4K25BYnM3QVREOEFaamJIbWZMcmdKZ2owOFFBTnV3dHhtemkxc0FlM3RTQU5pbVBkMFNhUDRFd1BBSFlHMTdtRDFOQjhBZW5nQUEydFQ2REdyeUZrRHJtdzdBUHJSOFM2QzVFd0RESDRDdGFYRTJOUlVBTFc0d0FCbGFtMUhOQkVCckd3dEFucFptVlJNQjBOS0dBcEN0bFptMTZROEJ0cktKQUhDdGhROEhiblpoaGo5ODJ5L2QvMm92b2FwZnUrOXFMd0crYWFzUnNNbGJBSVkvQUh1eDFabTJ1UURZNmtZQndGUmJuRzJiQ29BdGJoQUF6R0ZyTTI0ekFiQzFqUUdBdVcxcDFtMGlBTGEwSVFDd3BLM012T29Cc0pXTkFJQzFiR0gyVlEyQUxXd0FBTlJRZXdaV1B3RUFBTlpYTFFCcWx3OEExRlp6RmxZSkFNTWZBUDVXYXlhdUhnQ0dQd0I4cWNac1hEVUFESDhBZU4vYU0zSzFBREQ4QWVCamE4NUtmd1VBQUlGV0NRRHYvZ0hnTm12TnpNVy9vOWp3WjgrTy9SOVZILyt4LzZIcTQ5ZjJPdnhaOWZFdnc0OVZINTk5TzN3K0x6cWpGejBCTVB3QllKcWxaNmpQQUFCQW9NVUN3THQvQUNpejVDeGRKQUFNZndDWXgxSXpkZllBTVB3QllGNUx6RmFmQVFDQVFMTUdnSGYvQUxDTXVXZnNiQUZnK0FQQXN1YWN0VzRCQUVDZ1dRTEF1MzhBV01kY005Y0pBQUFFS2c0QTcvNEJZRjF6ekY0bkFBQVFxQ2dBdlBzSGdEcEtaL0RrQUREOEFhQ3VrbG44TU9kQ1lHM0gvbytxai8vWS8xRDE4ZFBWM3Y5alYvZjFkeGwrclByNHRHM1NDWUIzL3dDd0RWTm5zZzhCQWtDZ3V3UEF1MzhBMkpZcHM5a0pBQUFFdWlzQXZQc0hnRzI2ZDBZN0FRQ0FRRGNIZ0hmL0FMQnQ5OHhxSndBQUVFZ0FBRUNnbXdMQThUOEF0T0hXbWUwRUFBQUNmVE1BdlBzSGdMYmNNcnVkQUFCQUlBRUFBSUUrREFESC93RFFwbS9OOEllMUZnTHZPZlpsMzZkZSsvdmd5VmI3OVhmc3l2Ny9jeGwrbkdrbHRNZ3RBQUFJOU5VQWNQd1BBRzM3YUpZN0FRQ0FRQUlBQUFLOUd3Q08vd0ZnSDc0MjA1MEFBRUFnQVFBQWdmNFRBSTcvQVdCZjNwdnRUZ0FBSUpBQUFJQkFBZ0FBQW4wUkFPNy9BOEErL1h2R093RUFnRUFDQUFBQ0NRQUFDSFI0K3gvdS96UEY4VHpVWGdKUXllWFUxMTRDRXh3K253OWQ1d1FBQUNJSkFBQUlKQUFBSUpBQUFJQkFBZ0FBQW4zcU9uOEJBQUFwM21hK0V3QUFDQ1FBQUNDUUFBQ0FRQUlBQUFJSkFBQUlKQUFBSUpBQUFJQkFuL3czQUFBZ3kvaDBHcDBBQUVDZ2d4T0F0aDNQUTlIMUwvM2pUQ3NCMGp3UHIwWFhYMDc5VEN0aENpY0FBQkJJQUFCQUlBRUFBSUVFQUFBRUVnQUFFRWdBQUVBZ0FRQUFnUVFBQUFRU0FBQVFTQUFBUUNBQkFBQ0JCQUFBQkJJQUFCQklBQUJBSUFFQUFJRU80OU5wckwySWxoM1BROUgxTC8zalRDdVo1dWYrcDZxUC85dndlOVhIQitwNUhsNkxycitjK3BsV2tza0pBQUFFRWdBQUVFZ0FBRUFnQVFBQWdRUUFBQVFTQUFBUVNBQUFRQ0FCQUFDQkJBQUFCQklBQUJCSUFBQkFJQUVBQUlFRUFBQUVFZ0FBRUVnQUFFQ2doOW9McU8xNEhvcXVmK2tmWjFySk5ELzNQMVY5ZklDcFNuOS9sdjcrdnB6Nm91dGI1d1FBQUFJSkFBQUlKQUFBSUpBQUFJQkFBZ0FBQWdrQUFBZ2tBQUFna0FBQWdFQUNBQUFDQ1FBQUNDUUFBQ0NRQUFDQVFBSUFBQUlKQUFBSUpBQUFJTkJoZkRxTnRSZFJvdlQ3b0V1L2o3clV6LzFQVlIvL3QrSDNxbzhQVU12ejhGcDAvZVhVejdTU09wd0FBRUFnQVFBQWdRUUFBQVFTQUFBUVNBQUFRQ0FCQUFDQkJBQUFCQklBQUJCSUFBQkFJQUVBQUlFRUFBQUVFZ0FBRUVnQUFFQWdBUUFBZ1FRQUFBUTZqRStuc2VZQ2p1ZWg2UHFYL25HbWxRREE3WjZIMTZMckw2ZCtwcFZNNHdRQUFBSUpBQUFJSkFBQUlKQUFBSUJBQWdBQUFna0FBQWdrQUFBZ2tBQUFnRUFDQUFBQ0NRQUFDQ1FBQUNDUUFBQ0FRQUlBQUFJSkFBQUlKQUFBSU5CaGZEcU5KZi9BOFR3VUxlQ2xmeXk2bnJwS3Z3KzdsTmNQSmJ4K3FhbjA5WGM1OVVYWE93RUFnRUFDQUFBQ0NRQUFDQ1FBQUNDUUFBQ0FRQUlBQUFJSkFBQUlKQUFBSUpBQUFJQkFBZ0FBQWdrQUFBZ2tBQUFna0FBQWdFQUNBQUFDQ1FBQUNIVG92L3R1TFBrSGZKOTEyNHEvai9xdnYyWmF5VFRINzc4dnV0N3J0MjFldjE2L3lVcGYvMDRBQUNDUUFBQ0FRQUlBQUFJSkFBQUlKQUFBSUpBQUFJQkFBZ0FBQWdrQUFBZ2tBQUFna0FBQWdFQUNBQUFDQ1FBQUNDUUFBQ0NRQUFDQVFBSUFBQUk5MUY0QTJVcS9EeDFxOHZxbFpVNEFBQ0NRQUFDQVFBSUFBQUlKQUFBSUpBQUFJSkFBQUlCQUFnQUFBZ2tBQUFna0FBQWdrQUFBZ0VBQ0FBQUNDUUFBQ0NRQUFDQ1FBQUNBUUFJQUFBSTkxRjRBYmZOOTZMVE02NWRrVGdBQUlKQUFBSUJBQWdBQUFna0FBQWdrQUFBZ2tBQUFnRUFDQUFBQ0NRQUFDQ1FBQUNDUUFBQ0FRQUlBQUFJSkFBQUlKQUFBSUpBQUFJQkFBZ0FBQWozVVhnQjF2ZlNQdFpjQWszbjl3blJPQUFBZ2tBQUFnRUFDQUFBQ0NRQUFDQ1FBQUNDUUFBQ0FRQUlBQUFJSkFBQUlKQUFBSUpBQUFJQkFBZ0FBQWdrQUFBZ2tBQUFna0FBQWdFQUNBQUFDUGRSZVFMcmg5YytpNi92SEgyWmFDWkRHNzU5c1RnQUFJSkFBQUlCQUFnQUFBZ2tBQUFna0FBQWdrQUFBZ0VBQ0FBQUNDUUFBQ0NRQUFDQ1FBQUNBUUFJQUFBSUpBQUFJSkFBQUlKQUFBSUJBQWdBQUFqM1VYa0RyU3I5UHUvYmoxLzQrNytmaHRlajZsLzV4cHBXUXFQWFhuOTgvbEhBQ0FBQ0JCQUFBQkJJQUFCQklBQUJBSUFFQUFJRUVBQUFFRWdBQUVFZ0FBRUFnQVFBQWdRUUFBQVFTQUFBUVNBQUFRQ0FCQUFDQkJBQUFCQklBQUJEb01ENmR4cEovNEhnZWloWlErL3UwYTJ2OSs3Ukx2MCs5dHZUWFgrdTgvc3EwL3Z1bmRhV3YzOHVwTDdyZUNRQUFCQklBQUJCSUFBQkFJQUVBQUlFRUFBQUVFZ0FBRUVnQUFFQWdBUUFBZ1FRQUFBUVNBQUFRU0FBQVFDQUJBQUNCQkFBQUJCSUFBQkJJQUFCQW9NUDRkQnByTHVCNEhvcXVyLzE5MnBRcC9UNXN6ejhsdlA0b1VmcjZ1Wno2bVZZeWpSTUFBQWdrQUFBZ2tBQUFnRUFDQUFBQ0NRQUFDQ1FBQUNDUUFBQ0FRQUlBQUFJSkFBQUlKQUFBSUpBQUFJQkFBZ0FBQWdrQUFBZ2tBQUFna0FBQWdFQ0g4ZWswMWw1RWllTjVLTHJlOTNrRFpIb2VYb3V1djV6Nm1WWlNoeE1BQUFna0FBQWdrQUFBZ0VBQ0FBQUNDUUFBQ0NRQUFDQ1FBQUNBUUFJQUFBSUpBQUFJSkFBQUlKQUFBSUJBQWdBQUFna0FBQWdrQUFBZ2tBQUFnRUNIOGVrMDFsNUVUY2Z6VUhUOVMvODQwMG9BdU1mejhGcDAvZVhVejdTU05qa0JBSUJBQWdBQUFna0FBQWdrQUFBZ2tBQUFnRUFDQUFBQ0NRQUFDQ1FBQUNDUUFBQ0FRQUlBQUFJSkFBQUlKQUFBSUpBQUFJQkFBZ0FBQWdrQUFBaDBHSjlPWSsxRnRPeDRIb3F1ZitrZloxb0pRRnVlaDllaTZ5K25mcWFWWkhJQ0FBQ0JCQUFBQkJJQUFCQklBQUJBSUFFQUFJRUVBQUFFRWdBQUVFZ0FBRUFnQVFBQWdRUUFBQVFTQUFBUVNBQUFRQ0FCQUFDQkJBQUFCQklBQUJEb01ENmR4dHFMU0hZOEQxVWYvNlYvclByNFFEM1B3MnZWeDcrYytxcVBuODRKQUFBRUVnQUFFRWdBQUVBZ0FRQUFnUVFBQUFRU0FBQVFTQUFBUUNBQkFBQ0JCQUFBQkJJQUFCQklBQUJBSUFFQUFJRUVBQUFFRWdBQUVFZ0FBRUNndy9oMEdtc3ZnbnFPNTZIMkVvcTg5SSsxbDBDdzUrRzE5aEtLWEU1OTdTVlFrUk1BQUFqMDZmRDVmS2k5Q0FCZ1BZZlA1NE1UQUFBSUpBQUFJSkFBQUlCQUFnQUFBZ2tBQUFna0FBQWdrQUFBZ0VDZnV1N3Z2d2VzdlJBQVlIbHZNOThKQUFBRUVnQUFFRWdBQUVBZ0FRQUFnUVFBQUFUNjR0UC80OU5wckxVUW1PSjRIbW92Z1dDWFUxOTdDWENYNjcvNmN3SUFBSUVFQUFBRUVnQUFFT2lMQVBCZkJBU0FmZnIzakhjQ0FBQ0JCQUFBQkJJQUFCRG9Qd0hnY3dBQXNDL3Z6WFluQUFBUVNBQUFRS0IzQThCdEFBRFloNi9OZENjQUFCQklBQUJBb0s4R2dOc0FBTkMyajJhNUV3QUFDUFJRZXdGUXd2ZXhBMHp6NFFtQTJ3QUEwS1p2elhDM0FBQWdrQUFBZ0VEZkRBQzNBUUNnTGJmTWJpY0FBQkRvcGdCd0NnQUFiYmgxWmpzQkFJQkFBZ0FBQXQwY0FHNERBTUMyM1RPcm5RQUFRS0M3QXNBcEFBQnMwNzB6MmdrQUFBUzZPd0NjQWdEQXRreVp6VTRBQUNEUXBBQndDZ0FBMnpCMUpqc0JBSUJBa3dQQUtRQUExRlV5aTR0T0FFUUFBTlJST29QZEFnQ0FRTVVCNEJRQUFOWTF4K3gxQWdBQWdXWUpBS2NBQUxDT3VXYXVFd0FBQ0RSYkFEZ0ZBSUJselRsclp6MEJFQUVBc0l5NVo2eGJBQUFRYVBZQWNBb0FBUE5hWXJZdWNnSWdBZ0JnSGt2TjFNVnVBWWdBQUNpejVDejFHUUFBQ0xSb0FEZ0ZBSUJwbHA2aGk1OEFpQUFBdU04YXMzT1ZXd0FpQUFCdXM5Yk05QmtBQUFpMFdnQTRCUUNBajYwNUsxYzlBUkFCQVBDK3RXZms2cmNBUkFBQWZLbkdiS3p5R1FBUkFBQi9xelVUcTMwSVVBUUFrSzdtTFBSWEFBQVFxR29BT0FVQUlGWHRHVmo5QktEMkJnREEycll3KzZvSFFOZHRZeU1BWUExYm1YbWJDSUN1Mjg2R0FNQlN0alRyTmhNQVhiZXRqUUdBT1cxdHhtMHFBTHB1ZXhzRUFLVzJPTnMyRndCZHQ4Mk5Bb0FwdGpyVE5oa0FYYmZkRFFPQVcyMTVsbTEyWWRmR3A5TllldzBBY0tzdEQvNDNtejBCdU5iQ1JnSkExN1V6czVvSWdLNXJaME1CeU5YU3JHb21BTHF1clkwRklFdHJNNnFwQU9pNjlqWVlnUDFyY1RZMXQrQnJQaHdJUUUwdER2NDN6WjBBWEd0NTR3Rm9XK3N6cU9rQTZMcjJud0FBMnJPSDJkUDhEM0ROTFFFQWxyU0h3ZittK1JPQWEzdDZZZ0RZbHIzTm1GMEZRTmZ0N3drQ29MNDl6cGJkL1VEWDNCSUFvTVFlQi8rYjNaMEFYTnZ6RXdmQXN2WStRM2I5dzExekdnREFMZlkrK045RS9KRFhoQUFBNzBrWi9HK2lmdGhyUWdDQXJzc2IvRzkyL1JtQWo2USs0UUQ4STNrV3hQN2cxNXdHQUdSSkh2eHY0amZnbWhBQTJEZUQveDgyNGgxQ0FHQmZEUDcvc2lFZkVBSUFiVFA0djg3RzNFZ01BTFRCMEwrTlRicVRFQURZSm9QL1BqYXJnQmdBcU12UW44N0d6VVFNQUt6RDBKK0hUVnlBR0FDWWw2RS9QeHU2TURFQU1JMmh2eXlidXpKQkFQQStBMzlkTnJzeVFRQ2tNdkRyc3ZrYkpReUF2VERvdDhtVDBpaUJBR3lGQWQrbS93UDlBUlFVTDNESVl3QUFBQUJKUlU1RXJrSmdnZz09IiwgInNpemVzIjogIjUxMng1MTIiLCAidHlwZSI6ICJpbWFnZS9wbmciLCAicHVycG9zZSI6ICJhbnkgbWFza2FibGUifV19"/>
+<meta name="mobile-web-app-capable" content="yes"/>
+<meta name="apple-mobile-web-app-capable" content="yes"/>
+<meta name="apple-mobile-web-app-status-bar-style" content="black-translucent"/>
+<meta name="apple-mobile-web-app-title" content="TOCA"/>
+<meta name="theme-color" content="#ff3c32"/>
+<link rel="apple-touch-icon" href="data:image/png;base64,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"/>
+<script src="https://cdnjs.cloudflare.com/ajax/libs/xlsx/0.18.5/xlsx.full.min.js"></script>
+<script src="https://cdn.jsdelivr.net/npm/@supabase/supabase-js@2"></script>
+<style>
+*{margin:0;padding:0;box-sizing:border-box;}
+body{background:#f5f4f0;font-family:'Georgia','Batang',serif;min-height:100vh;}
+button,input,textarea{font-family:'Georgia','Batang',serif;}
+.wrap{display:flex;flex-direction:column;align-items:center;padding:40px 16px 60px;}
+.header{text-align:center;margin-bottom:28px;}
+.header-sub{font-size:11px;letter-spacing:6px;text-transform:uppercase;color:#aaa;margin-bottom:6px;}
+.header h1{font-size:32px;font-weight:800;color:#111;letter-spacing:-1px;}
+.header-line{width:36px;height:3px;background:#111;margin:10px auto 0;border-radius:2px;}
+.card{width:100%;max-width:580px;background:#fff;border:1.5px solid #e5e7eb;border-radius:18px;box-shadow:0 6px 32px rgba(0,0,0,.07);overflow:hidden;}
+.footer-note{font-size:11px;color:#ccc;margin-top:20px;}
+.btn-dark{width:100%;padding:14px;background:#111827;color:#fff;border:none;border-radius:10px;font-size:15px;font-weight:700;cursor:pointer;}
+.btn-dark:hover{background:#374151;}
+.btn-outline{flex:1;padding:13px;background:#fff;color:#111;border:1.5px solid #111;border-radius:10px;font-size:14px;font-weight:700;cursor:pointer;}
+.btn-ghost{background:none;border:1px solid #e5e7eb;border-radius:6px;padding:4px 12px;font-size:12px;color:#6b7280;cursor:pointer;}
+.back-btn{background:none;border:none;font-size:20px;cursor:pointer;color:#6b7280;padding:0;}
+.section{padding:24px;}
+.row{display:flex;align-items:center;gap:10px;}
+.grade-card{text-align:center;padding:24px 20px;border-radius:12px;margin-bottom:22px;}
+.grade-pct{font-size:52px;font-weight:800;line-height:1;}
+.grade-sub{font-size:15px;margin-top:6px;color:#374151;}
+.grade-label{font-size:18px;margin-top:4px;}
+/* Count selector */
+.count-row{display:flex;gap:8px;flex-wrap:wrap;margin-bottom:20px;}
+.count-btn{flex:1;min-width:60px;padding:9px 6px;border-radius:8px;border:1.5px solid #e5e7eb;background:#fafafa;font-size:13px;font-weight:600;color:#6b7280;cursor:pointer;text-align:center;transition:all .15s;}
+.count-btn:hover{border-color:#999;}
+.count-btn.active{border:2px solid #111827;background:#111827;color:#fff;}
+/* Mode buttons */
+.mode-btn{display:flex;align-items:center;gap:14px;padding:16px 18px;border-radius:12px;cursor:pointer;border:1.5px solid #e5e7eb;background:#fafafa;text-align:left;width:100%;}
+.mode-btn:hover{border-color:#111;background:#fff;}
+.mode-icon{font-size:24px;}
+.mode-title{font-size:15px;font-weight:700;color:#111;}
+.mode-desc{font-size:12px;color:#9ca3af;margin-top:2px;}
+.mode-arrow{margin-left:auto;color:#d1d5db;font-size:18px;}
+.tag{font-size:10px;color:#9ca3af;background:#f3f4f6;border-radius:4px;padding:1px 7px;}
+.prog-wrap{flex:1;height:6px;background:#f3f4f6;border-radius:99px;overflow:hidden;}
+.prog-bar{height:100%;background:#111827;border-radius:99px;transition:width .3s;}
+.choices{display:grid;grid-template-columns:1fr 1fr;gap:10px;}
+.choice-btn{padding:12px 14px;border-radius:10px;cursor:pointer;text-align:left;border:1.5px solid #e5e7eb;background:#fafafa;color:#374151;font-size:14px;display:flex;align-items:center;gap:8px;transition:all .15s;width:100%;}
+.choice-btn:hover{border-color:#999;}
+.choice-btn.selected{border:2px solid #111;background:#111;color:#fff;font-weight:700;}
+.choice-btn.correct{border:2px solid #86efac!important;background:#dcfce7!important;color:#16a34a!important;font-weight:700;}
+.choice-btn.wrong{border:2px solid #fca5a5!important;background:#fee2e2!important;color:#dc2626!important;font-weight:700;}
+.result-item{border-radius:12px;overflow:hidden;margin-bottom:10px;}
+.result-header{padding:10px 14px;display:flex;align-items:center;gap:8px;}
+.result-choices{padding:10px 14px;display:grid;grid-template-columns:1fr 1fr;gap:6px;}
+.rc{padding:7px 10px;border-radius:8px;font-size:13px;display:flex;gap:6px;align-items:center;border:1px solid #e5e7eb;}
+.divider{display:flex;align-items:center;gap:10px;margin:14px 0;}
+.divider-line{flex:1;height:1px;background:#e5e7eb;}
+.divider-text{font-size:11px;color:#9ca3af;}
+.pill-green{font-size:12px;background:#f0fdf4;color:#16a34a;border:1px solid #bbf7d0;border-radius:99px;padding:3px 10px;}
+.pill-red{font-size:12px;background:#fff5f5;color:#dc2626;border:1px solid #fecaca;border-radius:99px;padding:3px 10px;}
+.typing-input{width:100%;padding:14px 16px;font-size:16px;border:2px solid #d1d5db;border-radius:10px;outline:none;background:#fafafa;color:#111;transition:border-color .2s;}
+.typing-input:focus{border-color:#111;}
+.typing-input.correct{border-color:#16a34a!important;background:#f0fdf4;}
+.typing-input.wrong{border-color:#dc2626!important;background:#fff5f5;}
+.match-grid{display:grid;grid-template-columns:1fr 1fr;gap:10px;}
+.match-btn{padding:13px 12px;border-radius:10px;cursor:pointer;border:1.5px solid #e5e7eb;background:#fafafa;font-size:13px;text-align:center;transition:all .15s;width:100%;}
+.match-btn:hover{border-color:#999;}
+.match-btn.selected{border:2px solid #2563eb;background:#eff6ff;color:#2563eb;font-weight:700;}
+.match-btn.matched{border:2px solid #86efac;background:#dcfce7;color:#16a34a;font-weight:700;cursor:default;}
+.match-btn.wrong-flash{border:2px solid #fca5a5;background:#fee2e2;animation:flash .4s ease;}
+@keyframes flash{0%,100%{opacity:1}50%{opacity:.4}}
+.hist-item{padding:14px 16px;border-radius:10px;border:1.5px solid #e5e7eb;background:#fafafa;margin-bottom:8px;}
+.hist-row{display:flex;justify-content:space-between;align-items:center;}
+.hist-mode{font-size:12px;color:#6b7280;}
+.hist-score{font-size:20px;font-weight:800;}
+.hist-date{font-size:11px;color:#9ca3af;margin-top:4px;}
+.saved-btn{width:100%;padding:16px 18px;background:linear-gradient(135deg,#1e293b 0%,#334155 100%);color:#fff;border:none;border-radius:12px;cursor:pointer;display:flex;align-items:center;gap:12px;margin-bottom:16px;text-align:left;}
+/* Login */
+.user-avatar{width:64px;height:64px;border-radius:99px;background:#111827;color:#fff;font-size:24px;display:flex;align-items:center;justify-content:center;margin:0 auto 12px;}
+.user-chip{display:inline-flex;align-items:center;gap:6px;background:#f3f4f6;border:1.5px solid #e5e7eb;border-radius:99px;padding:5px 14px 5px 10px;font-size:13px;color:#374151;cursor:pointer;}
+.user-chip:hover{background:#e5e7eb;}
+</style>
+</head>
+<body>
+<div class="wrap">
+  <div class="header">
+    <div class="header-sub">Vocabulary</div>
+    <h1>단어 학습</h1>
+    <div class="header-line"></div>
+    <div id="user-chip-wrap" style="margin-top:12px;display:flex;justify-content:center;"></div>
+  </div>
+  <div class="card" id="app"></div>
+  <div class="footer-note">단어집 · 사지선다 · 타이핑 · 짝맞추기 · 시험지 · 히스토리</div>
+</div>
+
+<script>
+const USER_KEY  = 'vocab-user';
+const WORDS_KEY = 'vocab-words';
+const HIST_KEY  = 'vocab-history';
+const COUNT_KEY = 'vocab-count';
+const STARS_KEY = 'vocab-stars';
+const LABELS    = ['①','②','③','④'];
+
+// ── Supabase ──────────────────────────────────────────────
+const _sb = supabase.createClient(
+  'https://zfjvtjglosbyfkyaenas.supabase.co',
+  'eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJpc3MiOiJzdXBhYmFzZSIsInJlZiI6InpmanZ0amdsb3NieWZreWFlbmFzIiwicm9sZSI6ImFub24iLCJpYXQiOjE3NzY0Mzg3MjEsImV4cCI6MjA5MjAxNDcyMX0.Db7EtZt7MTofZdR_B8fYJHtzFp-8-tyZ-ytXNFXeG0E'
+);
+
+async function sbLoadWords(username){
+  const {data,error} = await _sb.from('word_lists').select('words_text').eq('username',username).single();
+  if(error||!data) return '';
+  return data.words_text||'';
+}
+async function sbSaveWords(username, text){
+  await _sb.from('word_lists').upsert({username, words_text:text, updated_at:new Date().toISOString()},{onConflict:'username'});
+}
+async function sbLoadAllWords(){
+  const {data} = await _sb.from('word_lists').select('username,words_text');
+  return data||[];
+}
+
+// History, count, stars stay local
+function wKey(){ return (localStorage.getItem(USER_KEY)||'guest')+':'+WORDS_KEY; }
+function hKey(){ return (localStorage.getItem(USER_KEY)||'guest')+':'+HIST_KEY; }
+function cKey(){ return (localStorage.getItem(USER_KEY)||'guest')+':'+COUNT_KEY; }
+function sKey(){ return (localStorage.getItem(USER_KEY)||'guest')+':'+STARS_KEY; }
+
+// ── Stars helpers ─────────────────────────────────────────
+function getStars(){ try{ return new Set(JSON.parse(localStorage.getItem(sKey())||'[]')); }catch(e){ return new Set(); } }
+function toggleStar(en){
+  const s=getStars();
+  s.has(en)?s.delete(en):s.add(en);
+  localStorage.setItem(sKey(),JSON.stringify([...s]));
+}
+
+// ── Utilities ─────────────────────────────────────────────
+function parseWords(text){
+  const lines = text.trim().split('\n').map(l=>l.trim()).filter(Boolean);
+  const words=[]; let i=0;
+  while(i<lines.length){
+    const line=lines[i];
+    const s=line.replace(/^\d+[\.\)]\s*/,'').trim();
+    const sep=s.includes(' - ')?' - ':s.includes(':') ? ':' : null;
+    if(sep){ const si=s.indexOf(sep),en=s.slice(0,si).trim(),kr=s.slice(si+sep.length).trim(); if(en&&kr) words.push({en,kr}); i++;continue;}
+    const nx=lines[i+1];
+    if(nx&&!/^\d+[\.\)]/.test(nx)){ if(s&&nx.trim()) words.push({en:s,kr:nx.trim()}); i+=2;continue;}
+    i++;
+  }
+  return words;
+}
+function shuffle(arr){ const a=[...arr]; for(let i=a.length-1;i>0;i--){const j=Math.floor(Math.random()*(i+1));[a[i],a[j]]=[a[j],a[i]];} return a; }
+
+// Pick N random words from pool
+function pickWords(words, count){
+  if(count===0||count>=words.length) return shuffle([...words]);
+  return shuffle([...words]).slice(0,count);
+}
+
+function getActiveWords(){
+  if(_count==='star'){
+    const stars=getStars();
+    const starred=_words.filter(w=>stars.has(w.en));
+    return starred.length>=2?shuffle(starred):shuffle([..._words]);
+  }
+  return pickWords(_words,_count);
+}
+
+function genQuestions(words){
+  if(words.length<2) return [];
+  return shuffle(words).map((w,i)=>{
+    const dir=i%2===0?'en2kr':'kr2en';
+    const prompt=dir==='en2kr'?w.en:w.kr, answer=dir==='en2kr'?w.kr:w.en;
+    const others=shuffle(words.filter(x=>x.en!==w.en)).slice(0,3);
+    const wrong=others.map(x=>dir==='en2kr'?x.kr:x.en);
+    return {id:i,dir,prompt,answer,choices:shuffle([answer,...wrong]),hint:dir==='en2kr'?'🇺🇸→🇰🇷':'🇰🇷→🇺🇸'};
+  });
+}
+
+function saveHistory(mode,correct,total,done=true,testedWords=[],wrongWords=[]){
+  if(total===0) return;
+  const hist=JSON.parse(localStorage.getItem(hKey())||'[]');
+  hist.unshift({mode,correct,total,pct:Math.round(correct/total*100),done,
+    tested:testedWords,wrongs:wrongWords,
+    date:new Date().toLocaleString('ko-KR',{month:'numeric',day:'numeric',hour:'2-digit',minute:'2-digit'})});
+  if(hist.length>50) hist.pop();
+  localStorage.setItem(hKey(),JSON.stringify(hist));
+}
+// Track ongoing test so we can save on window close
+let _activeTest=null;
+function setActiveTest(mode,getScore){ _activeTest={mode,getScore}; }
+function clearActiveTest(){ _activeTest=null; }
+window.addEventListener('beforeunload',()=>{
+  if(_activeTest){ const s=_activeTest.getScore(); if(s.answered>0) saveHistory(_activeTest.mode,s.correct,s.answered,false); }
+});
+function gradeInfo(pct){
+  if(pct===100) return {label:'완벽해요! 🏆',color:'#16a34a',bg:'#f0fdf4'};
+  if(pct>=80)   return {label:'잘했어요! 🎉',color:'#2563eb',bg:'#eff6ff'};
+  if(pct>=60)   return {label:'괜찮아요 👍', color:'#d97706',bg:'#fffbeb'};
+  return {label:'더 연습해봐요 💪',color:'#dc2626',bg:'#fff5f5'};
+}
+
+const app=document.getElementById('app');
+let _words=[], _count=0; // 0 = all
+
+function getSavedCount(){ const v=localStorage.getItem(cKey()); if(v==='star') return 'star'; return parseInt(v||'0'); }
+function setSavedCount(n){ localStorage.setItem(cKey(),String(n)); _count=n; }
+
+// ── Element helpers ────────────────────────────────────────
+function el(tag,attr,children){
+  const e=document.createElement(tag);
+  Object.entries(attr||{}).forEach(([k,v])=>{
+    if(k==='class') e.className=v;
+    else if(k==='style') e.style.cssText=v;
+    else if(k.startsWith('on')) e.addEventListener(k.slice(2).toLowerCase(),v);
+    else e[k]=v;
+  });
+  (children||[]).forEach(c=>{ if(c!=null) e.append(typeof c==='string'?c:c); });
+  return e;
+}
+const div=(a,c)=>el('div',a,c);
+const btn=(a,c)=>el('button',a,c);
+const span=(a,c)=>el('span',a,c);
+const p=(a,c)=>el('p',a,c);
+
+function render(screen,words){
+  _words=words||_words; _count=getSavedCount(); app.innerHTML='';
+  // Show/hide user chip
+  const chipWrap=document.getElementById('user-chip-wrap');
+  if(chipWrap){
+    chipWrap.innerHTML='';
+    const u=localStorage.getItem(USER_KEY);
+    if(u && screen!=='login'){
+      const chip=el('button',{class:'user-chip',onClick:()=>{ if(confirm('사용자를 바꿀까요?')){ clearActiveTest(); localStorage.removeItem(USER_KEY); render('login'); } }});
+      chip.innerHTML=`<span style="font-size:16px">👤</span><span style="font-weight:600">${u}</span><span style="font-size:10px;color:#9ca3af;margin-left:2px">전환</span>`;
+      chipWrap.appendChild(chip);
+    }
+  }
+  ({login:renderLogin,input:renderInput,mode:renderMode,wordbook:renderWordbook,one:renderOne,typing:renderTyping,match:renderMatch,test:renderTest,history:renderHistory}[screen]||renderInput)();
+}
+
+// ── Excel Export ───────────────────────────────────────────
+async function exportToExcel(){
+  const wb = XLSX.utils.book_new();
+  let rows = [];
+  try{
+    rows = await sbLoadAllWords();
+  }catch(e){
+    // fallback to localStorage
+    for(let i=0;i<localStorage.length;i++){
+      const key=localStorage.key(i);
+      if(key&&key.endsWith(':'+WORDS_KEY)){
+        const user=key.slice(0,key.length-(':'+WORDS_KEY).length);
+        rows.push({username:user, words_text:localStorage.getItem(key)||''});
+      }
+    }
+  }
+  if(!rows.length){ alert('저장된 단어가 없어요!'); return; }
+  rows.forEach(({username, words_text})=>{
+    const words=parseWords(words_text||'');
+    if(!words.length) return;
+    const data=[['#','영어','한국어']];
+    words.forEach((w,i)=>data.push([i+1,w.en,w.kr]));
+    const ws=XLSX.utils.aoa_to_sheet(data);
+    ws['!cols']=[{wch:4},{wch:24},{wch:30}];
+    XLSX.utils.book_append_sheet(wb,ws,username.slice(0,31));
+  });
+  if(!wb.SheetNames.length){ alert('저장된 단어가 없어요!'); return; }
+  const date=new Date().toLocaleDateString('ko-KR',{year:'2-digit',month:'2-digit',day:'2-digit'}).replace(/\. /g,'-').replace('.','');
+  XLSX.writeFile(wb,`단어장_${date}.xlsx`);
+}
+function renderLogin(){
+  const sec=div({class:'section',style:'text-align:center;padding:36px 24px;'});
+  const av=div({class:'user-avatar'},['👤']);
+  sec.appendChild(av);
+  sec.appendChild(el('h2',{style:'font-size:20px;font-weight:800;color:#111;margin-bottom:4px'},['누구세요?']));
+  sec.appendChild(p({style:'font-size:13px;color:#9ca3af;margin-bottom:24px'},['이름을 입력하면 나만의 단어장이 열려요']));
+
+  const ni=el('input',{type:'text',placeholder:'이름 입력 (예: 김재희)',
+    style:'width:100%;padding:14px 16px;font-size:16px;border:1.5px solid #d1d5db;border-radius:10px;background:#fafafa;color:#111;outline:none;text-align:center;margin-bottom:8px;',
+    onFocus:e=>e.target.style.borderColor='#111',onBlur:e=>e.target.style.borderColor='#d1d5db'});
+  sec.appendChild(ni);
+
+  const errP=p({style:'color:#dc2626;font-size:13px;margin-bottom:8px;display:none'},[]);
+  sec.appendChild(errP);
+
+  const lb=btn({class:'btn-dark',onClick:async()=>{
+    const name=ni.value.trim();
+    if(!name){errP.textContent='이름을 입력해주세요.';errP.style.display='';return;}
+    lb.disabled=true; lb.textContent='불러오는 중... ⏳';
+    localStorage.setItem(USER_KEY,name);
+    try{
+      const text=await sbLoadWords(name);
+      if(text) localStorage.setItem(name+':'+WORDS_KEY, text);
+    }catch(e){}
+    render('input');
+  }},['시작하기 →']);
+  sec.appendChild(lb);
+  ni.addEventListener('keydown',e=>{ if(e.key==='Enter') lb.click(); });
+  app.appendChild(sec);
+  setTimeout(()=>ni.focus(),50);
+}
+
+// ── Count selector widget ──────────────────────────────────
+function makeCountSelector(){
+  const wrapper=div({});
+  wrapper.appendChild(p({style:'font-size:12px;color:#6b7280;margin-bottom:8px;font-weight:600'},['📌 문제 수 선택']));
+  const row=div({class:'count-row'});
+  const starCount=_words.filter(w=>getStars().has(w.en)).length;
+  const counts=[
+    {n:20,label:'20개'},{n:50,label:'50개'},{n:100,label:'100개'},
+    {n:0,label:'전체'},{n:'star',label:'⭐ '+starCount+'개'},
+  ];
+  counts.forEach(({n,label})=>{
+    const available=n==='star'?starCount>=2:(n===0||_words.length>=n);
+    const b=btn({
+      class:'count-btn'+((_count===n)?' active':''),
+      style:available?'':'opacity:.35;cursor:not-allowed',
+      onClick:()=>{
+        if(!available) return;
+        setSavedCount(n);
+        wrapper.querySelectorAll('.count-btn').forEach(x=>x.classList.remove('active'));
+        b.classList.add('active');
+      }
+    },[label+(n>0&&n!=='star'&&_words.length<n?` (${_words.length}개)`:'')]);
+    row.appendChild(b);
+  });
+  wrapper.appendChild(row);
+  if(_count==='star'&&starCount<2) wrapper.appendChild(p({style:'font-size:11px;color:#f59e0b;margin-top:4px'},['⚠ 별표 단어가 2개 이상 있어야 해요']));
+  return wrapper;
+}
+
+
+// ── INPUT ─────────────────────────────────────────────────
+function renderInput(){
+  const sec=div({class:'section'});
+  const savedRaw=localStorage.getItem(wKey())||'';
+  const savedWords=parseWords(savedRaw);
+  const hasSaved=savedWords.length>=2;
+
+  if(hasSaved){
+    const sb=btn({class:'saved-btn',onClick:()=>{ _words=savedWords; render('mode'); }});
+    sb.innerHTML=`<span style="font-size:24px">⚡</span><div style="flex:1"><div style="font-size:15px;font-weight:700">저장된 단어로 바로 시작</div><div style="font-size:12px;opacity:.7;margin-top:2px">단어 ${savedWords.length}개 저장됨</div></div><span style="font-size:20px;opacity:.6">›</span>`;
+    sec.appendChild(sb);
+    const dv=div({class:'divider'}); dv.innerHTML='<div class="divider-line"></div><span class="divider-text">또는 새로 입력</span><div class="divider-line"></div>'; sec.appendChild(dv);
+  }
+
+  sec.appendChild(p({style:'font-size:13px;color:#6b7280;margin-bottom:10px;line-height:1.7'},['번호+영어 → 다음 줄에 한국어 형식으로 입력하세요.']));
+  const ta=el('textarea',{placeholder:'1. Acoustic\n청각의\n19. Plethora\n과다, 과잉',rows:10,style:'width:100%;padding:14px 16px;font-size:15px;border:1.5px solid #d1d5db;border-radius:10px;background:#fafafa;color:#111;resize:vertical;outline:none;line-height:1.9;',
+    value:localStorage.getItem(wKey())||'',
+    onFocus:e=>e.target.style.borderColor='#111',onBlur:e=>e.target.style.borderColor='#d1d5db'});
+  sec.appendChild(ta);
+  const countP=p({style:'font-size:12px;color:#9ca3af;margin-top:6px;min-height:18px'},[]);
+  sec.appendChild(countP);
+  ta.addEventListener('input',()=>{
+    const c=parseWords(ta.value).length;
+    countP.textContent=ta.value.trim()?(c>=2?`✓ 단어 ${c}개 인식됨`:`⚠ 단어 ${c}개 — 2개 이상 필요`):'';
+    countP.style.color=c>=2?'#16a34a':'#f59e0b';
+  });
+  if(ta.value.trim()) ta.dispatchEvent(new Event('input'));
+  const errP=p({style:'color:#dc2626;font-size:13px;margin-top:6px;display:none'},[]);
+  sec.appendChild(errP);
+  sec.appendChild(btn({class:'btn-dark',style:'margin-top:14px',onClick:()=>{
+    const words=parseWords(ta.value);
+    if(words.length<2){errP.textContent='단어를 2개 이상 입력해주세요.';errP.style.display='';return;}
+    errP.style.display='none';
+    localStorage.setItem(wKey(),ta.value);
+    _words=words;
+    const user=localStorage.getItem(USER_KEY)||'guest';
+    sbSaveWords(user, ta.value).catch(()=>{}); // save to Supabase (async, don't block)
+    render('mode');
+  }},['계속하기 →']));
+  const hist=JSON.parse(localStorage.getItem(hKey())||'[]');
+  if(hist.length>0) sec.appendChild(btn({class:'btn-ghost',style:'width:100%;margin-top:10px;padding:10px',onClick:()=>render('history')},['📊 시험 히스토리 보기']));
+  sec.appendChild(btn({class:'btn-ghost',style:'width:100%;margin-top:8px;padding:10px;color:#16a34a;border-color:#bbf7d0;',onClick:()=>exportToExcel()},['📥 전체 단어장 엑셀로 저장 (.xlsx)']));
+  app.appendChild(sec);
+}
+
+// ── MODE ──────────────────────────────────────────────────
+function renderMode(){
+  const sec=div({class:'section'});
+  const topRow=div({style:'display:flex;align-items:center;justify-content:space-between;margin-bottom:16px'});
+  topRow.appendChild(span({style:'font-size:13px;color:#6b7280'},['단어 ',el('strong',{style:'color:#111'},[String(_words.length)+'개']),' 준비됨']));
+  topRow.appendChild(btn({class:'btn-ghost',onClick:()=>render('input')},['✏️ 단어 편집']));
+  sec.appendChild(topRow);
+
+  // ── Count selector ──
+  sec.appendChild(makeCountSelector());
+
+  const sep=div({style:'height:1px;background:#f3f4f6;margin:16px 0'});
+  sec.appendChild(sep);
+
+  const modes=[
+    {id:'wordbook',icon:'📖',label:'단어집',    desc:'전체 단어 목록 보기',noCount:true},
+    {id:'one',     icon:'🎯',label:'한 문제씩', desc:'사지선다 · 맞으면 바로 다음'},
+    {id:'typing',  icon:'✍️', label:'직접 입력', desc:'단어/뜻을 직접 타이핑'},
+    {id:'match',   icon:'🔗',label:'짝 맞추기', desc:'단어와 뜻을 서로 연결'},
+    {id:'test',    icon:'📝',label:'시험지',    desc:'전체 문제 한 번에'},
+    {id:'history', icon:'📊',label:'히스토리',  desc:'지난 시험 결과 보기',noCount:true},
+  ];
+  const list=div({style:'display:flex;flex-direction:column;gap:10px'});
+  modes.forEach(m=>{
+    const b=btn({class:'mode-btn',onClick:()=>render(m.id)});
+    b.innerHTML=`<span class="mode-icon">${m.icon}</span><div><div class="mode-title">${m.label}</div><div class="mode-desc">${m.desc}</div></div><span class="mode-arrow">›</span>`;
+    list.appendChild(b);
+  });
+  sec.appendChild(list);
+  app.appendChild(sec);
+}
+
+// ── WORDBOOK ──────────────────────────────────────────────
+function renderWordbook(){
+  const sec=div({class:'section'});
+  const topRow=div({class:'row',style:'margin-bottom:14px'});
+  topRow.appendChild(btn({class:'back-btn',onClick:()=>render('mode')},['←']));
+  topRow.appendChild(span({style:'font-size:16px;font-weight:700;color:#111'},['📖 단어집']));
+  topRow.appendChild(span({style:'font-size:12px;color:#9ca3af;margin-left:auto'},[_words.length+'개']));
+  sec.appendChild(topRow);
+
+  // Search row
+  const si=el('input',{type:'text',placeholder:'단어 검색...',
+    style:'width:100%;padding:10px 14px;font-size:14px;border:1.5px solid #e5e7eb;border-radius:10px;background:#fafafa;outline:none;margin-bottom:8px;',
+    onFocus:e=>e.target.style.borderColor='#111',onBlur:e=>e.target.style.borderColor='#e5e7eb'});
+  sec.appendChild(si);
+
+  // Star filter toggle
+  let starOnly=false;
+  const sfBtn=btn({style:'width:100%;padding:8px 14px;border-radius:10px;border:1.5px solid #e5e7eb;background:#fafafa;font-size:13px;font-weight:600;color:#6b7280;cursor:pointer;margin-bottom:14px;transition:all .15s;text-align:center'},['☆  별표한 단어만 보기']);
+  sfBtn.addEventListener('click',()=>{
+    starOnly=!starOnly;
+    sfBtn.style.background=starOnly?'#fef9c3':'#fafafa';
+    sfBtn.style.borderColor=starOnly?'#f59e0b':'#e5e7eb';
+    sfBtn.style.color=starOnly?'#b45309':'#6b7280';
+    sfBtn.textContent=starOnly?'⭐ 별표한 단어만 보기 (켜짐)':'☆  별표한 단어만 보기';
+    renderList(si.value);
+  });
+  sec.appendChild(sfBtn);
+
+  const hdr=div({style:'display:grid;grid-template-columns:1fr 1fr 32px;padding:6px 14px;font-size:11px;color:#9ca3af;letter-spacing:1px;text-transform:uppercase;margin-bottom:4px'});
+  hdr.innerHTML='<span>English</span><span>한국어</span><span></span>';
+  sec.appendChild(hdr);
+
+  const list=div({});
+  function renderList(q){
+    list.innerHTML='';
+    const stars=getStars();
+    let f=_words.filter(w=>w.en.toLowerCase().includes(q.toLowerCase())||w.kr.includes(q));
+    if(starOnly) f=f.filter(w=>stars.has(w.en));
+    if(!f.length){
+      list.appendChild(p({style:'text-align:center;color:#9ca3af;font-size:13px;padding:24px 0'},
+        [starOnly?'별표한 단어가 없어요':'검색 결과 없음']));
+      return;
+    }
+    f.forEach((w,i)=>{
+      const isStarred=getStars().has(w.en);
+      const row=div({style:`display:grid;grid-template-columns:1fr 1fr 32px;align-items:center;padding:10px 14px;border-radius:8px;background:${isStarred?'#fffbeb':i%2===0?'#fafafa':'#fff'};border:1px solid ${isStarred?'#fde68a':'#f3f4f6'};margin-bottom:2px`});
+      const enSpan=document.createElement('span'); enSpan.style.cssText='font-size:14px;font-weight:600;color:#111'; enSpan.textContent=w.en;
+      const krSpan=document.createElement('span'); krSpan.style.cssText='font-size:14px;color:#374151'; krSpan.textContent=w.kr;
+      const starBtn=btn({style:`background:none;border:none;font-size:18px;cursor:pointer;padding:0;opacity:${isStarred?1:.3};transition:opacity .15s`,
+        onClick:()=>{ toggleStar(w.en); renderList(q); }
+      },[isStarred?'⭐':'☆']);
+      row.appendChild(enSpan); row.appendChild(krSpan); row.appendChild(starBtn);
+      list.appendChild(row);
+    });
+  }
+  renderList('');
+  si.addEventListener('input',()=>renderList(si.value));
+  sec.appendChild(list);
+  app.appendChild(sec);
+}
+
+// ── ONE BY ONE ────────────────────────────────────────────
+function renderOne(){
+  const pool=getActiveWords();
+  const questions=genQuestions(pool);
+  let idx=0,score={correct:0,wrong:0},phase='question',wrongChoice=null;
+  const wrongWords=[];
+  setActiveTest('한 문제씩',()=>({correct:score.correct,answered:idx}));
+  function draw(){
+    const sec=div({class:'section'});
+    if(idx>=questions.length){
+      clearActiveTest();
+      const pct=Math.round(score.correct/questions.length*100);
+      saveHistory('한 문제씩',score.correct,questions.length,true,pool,wrongWords);
+      renderDone(sec,pct,score.correct,questions.length,()=>{clearActiveTest();render('mode');},()=>render('one'));
+      app.innerHTML='';app.appendChild(sec);return;
+    }
+    const q=questions[idx];
+    renderProgressRow(sec,idx,questions.length,score,()=>{ if(idx>0) saveHistory('한 문제씩',score.correct,idx,false,pool.slice(0,idx),wrongWords); clearActiveTest(); render('mode'); });
+    const qcard=div({style:'text-align:center;padding:32px 20px;background:#fafafa;border-radius:14px;border:1.5px solid #e5e7eb;margin-bottom:20px'});
+    qcard.innerHTML=`<span class="tag">${q.hint}</span><div style="font-size:26px;font-weight:800;color:#111;margin-top:12px">${q.prompt}</div>`;
+    sec.appendChild(qcard);
+    const grid=div({class:'choices'});
+    q.choices.forEach((choice,ci)=>{
+      const cls='choice-btn'+(phase==='wrong'&&choice===q.answer?' correct':phase==='wrong'&&choice===wrongChoice?' wrong':'');
+      const b=btn({class:cls});
+      b.innerHTML=`<span style="opacity:.4;font-size:13px">${LABELS[ci]}</span>${choice}${phase==='wrong'&&choice===q.answer?' <span style="margin-left:auto">✓</span>':''}`;
+      if(phase==='question') b.addEventListener('click',()=>{
+        if(choice===q.answer){score.correct++;idx++;phase='question';}
+        else{
+          wrongChoice=choice;phase='wrong';score.wrong++;
+          if(!wrongWords.find(w=>w.en===q.id||w.prompt===q.prompt)){
+            const orig=pool.find(w=>(q.dir==='en2kr'?w.en:w.kr)===q.prompt);
+            if(orig) wrongWords.push(orig);
+          }
+        }
+        draw();
+      });
+      grid.appendChild(b);
+    });
+    sec.appendChild(grid);
+    if(phase==='wrong') sec.appendChild(btn({class:'btn-dark',style:'margin-top:16px',onClick:()=>{idx++;phase='question';wrongChoice=null;draw();}},['다음 문제 →']));
+    app.innerHTML='';app.appendChild(sec);
+  }
+  draw();
+}
+
+// ── TYPING ────────────────────────────────────────────────
+function renderTyping(){
+  const pool=getActiveWords();
+  const qs=shuffle(pool).map((w,i)=>{ const dir=i%2===0?'en2kr':'kr2en'; return {word:w,prompt:dir==='en2kr'?w.en:w.kr,answer:dir==='en2kr'?w.kr:w.en,hint:dir==='en2kr'?'🇺🇸→🇰🇷':'🇰🇷→🇺🇸'}; });
+  let idx=0,score={correct:0,wrong:0},state='input';
+  const wrongWords=[];
+  setActiveTest('직접 입력',()=>({correct:score.correct,answered:idx}));
+  function norm(s){return s.trim().toLowerCase().replace(/\s+/g,' ');}
+  function draw(){
+    const sec=div({class:'section'});
+    if(idx>=qs.length){
+      clearActiveTest();
+      const pct=Math.round(score.correct/qs.length*100);
+      saveHistory('직접 입력',score.correct,qs.length,true,pool,wrongWords);
+      renderDone(sec,pct,score.correct,qs.length,()=>{clearActiveTest();render('mode');},()=>render('typing'));
+      app.innerHTML='';app.appendChild(sec);return;
+    }
+    const q=qs[idx];
+    renderProgressRow(sec,idx,qs.length,score,()=>{ if(idx>0) saveHistory('직접 입력',score.correct,idx,false,pool.slice(0,idx),wrongWords); clearActiveTest(); render('mode'); });
+    const qcard=div({style:'text-align:center;padding:28px 20px;background:#fafafa;border-radius:14px;border:1.5px solid #e5e7eb;margin-bottom:20px'});
+    qcard.innerHTML=`<span class="tag">${q.hint}</span><div style="font-size:24px;font-weight:800;color:#111;margin-top:10px">${q.prompt}</div>`;
+    sec.appendChild(qcard);
+    const inputCls='typing-input'+(state==='correct'?' correct':state==='wrong'?' wrong':'');
+    const ti=el('input',{type:'text',class:inputCls,placeholder:'정답을 입력하세요...',disabled:state!=='input'});
+    sec.appendChild(ti);
+    if(state==='wrong') sec.appendChild(p({style:'font-size:13px;color:#dc2626;margin-top:8px'},['❌ 정답: '+q.answer]));
+    if(state==='correct') sec.appendChild(p({style:'font-size:13px;color:#16a34a;margin-top:8px'},['✅ 정답!']));
+    function check(){
+      if(norm(ti.value)===norm(q.answer)){score.correct++;state='correct';}
+      else{score.wrong++;state='wrong'; if(!wrongWords.find(w=>w.en===q.word.en)) wrongWords.push(q.word);}
+      draw();
+    }
+    if(state==='input'){
+      ti.addEventListener('keydown',e=>{ if(e.key==='Enter') check(); });
+      sec.appendChild(btn({class:'btn-dark',style:'margin-top:14px',onClick:check},['확인 (Enter)']));
+    } else {
+      sec.appendChild(btn({class:'btn-dark',style:'margin-top:14px',onClick:()=>{idx++;state='input';draw();}},['다음 문제 →']));
+    }
+    app.innerHTML='';app.appendChild(sec);
+    if(state==='input') setTimeout(()=>ti.focus(),50);
+  }
+  draw();
+}
+
+// ── MATCH ─────────────────────────────────────────────────
+function renderMatch(){
+  const GROUP=4;
+  const pool=getActiveWords();
+  const allWords=shuffle(pool);
+  let groupIdx=0,totalCorrect=0;
+  const totalGroups=Math.ceil(allWords.length/GROUP);
+
+  function doGroup(){
+    if(groupIdx>=totalGroups){
+      saveHistory('짝 맞추기',allWords.length,allWords.length,true,allWords,[]);
+      const sec=div({class:'section'});
+      const g=gradeInfo(100);
+      const gc=div({class:'grade-card',style:`background:${g.bg};border:1.5px solid ${g.color}33`});
+      gc.innerHTML=`<div class="grade-pct" style="color:${g.color}">🎉</div><div class="grade-sub" style="font-size:18px;font-weight:700;margin-top:8px">전부 맞혔어요!</div><div class="grade-label" style="color:${g.color}">${g.label}</div>`;
+      sec.appendChild(gc);
+      const row=div({style:'display:flex;gap:10px'});
+      row.appendChild(btn({class:'btn-outline',onClick:()=>render('mode')},['← 뒤로']));
+      row.appendChild(btn({class:'btn-outline',onClick:()=>render('match')},['다시 풀기 🔄']));
+      sec.appendChild(row);
+      app.innerHTML='';app.appendChild(sec);return;
+    }
+    const group=allWords.slice(groupIdx*GROUP,(groupIdx+1)*GROUP);
+    const leftItems=shuffle([...group]),rightItems=shuffle([...group]);
+    let selLeft=null,selRight=null,matched=new Set(),wrongPair=null,wrongTimer=null;
+    function draw(){
+      const sec=div({class:'section'});
+      const topRow=div({class:'row',style:'margin-bottom:16px'});
+      topRow.appendChild(btn({class:'back-btn',onClick:()=>render('mode')},['←']));
+      topRow.appendChild(span({style:'font-size:16px;font-weight:700;color:#111'},['🔗 짝 맞추기']));
+      topRow.appendChild(span({style:'font-size:12px;color:#9ca3af;margin-left:auto'},[`${groupIdx+1} / ${totalGroups} 세트`]));
+      sec.appendChild(topRow);
+      sec.appendChild(p({style:'font-size:13px;color:#6b7280;margin-bottom:16px;text-align:center'},['단어와 뜻을 하나씩 클릭해서 연결하세요']));
+      const grid=div({class:'match-grid'});
+      const lh=div({style:'font-size:11px;color:#9ca3af;text-transform:uppercase;letter-spacing:1px;padding:4px 0;text-align:center'}); lh.textContent='English';
+      const rh=div({style:'font-size:11px;color:#9ca3af;text-transform:uppercase;letter-spacing:1px;padding:4px 0;text-align:center'}); rh.textContent='한국어';
+      grid.appendChild(lh);grid.appendChild(rh);
+      leftItems.forEach((w,i)=>{
+        const isM=matched.has(w.en),isSL=selLeft&&selLeft.en===w.en,isW=wrongPair&&wrongPair.left.en===w.en;
+        const lb=btn({class:'match-btn'+(isM?' matched':isSL?' selected':isW?' wrong-flash':'')}); lb.textContent=w.en;
+        if(!isM) lb.addEventListener('click',()=>{ selLeft=w; if(selRight){ if(selLeft.en===selRight.en){matched.add(selLeft.en);totalCorrect++;selLeft=null;selRight=null;}else{wrongPair={left:selLeft,right:selRight};selLeft=null;selRight=null;clearTimeout(wrongTimer);wrongTimer=setTimeout(()=>{wrongPair=null;draw();},500);} } draw(); });
+        grid.appendChild(lb);
+        const rw=rightItems[i],isMR=matched.has(rw.en),isSR=selRight&&selRight.en===rw.en,isWR=wrongPair&&wrongPair.right.en===rw.en;
+        const rb=btn({class:'match-btn'+(isMR?' matched':isSR?' selected':isWR?' wrong-flash':'')}); rb.textContent=rw.kr;
+        if(!isMR) rb.addEventListener('click',()=>{ selRight=rw; if(selLeft){ if(selLeft.en===selRight.en){matched.add(selLeft.en);totalCorrect++;selLeft=null;selRight=null;}else{wrongPair={left:selLeft,right:selRight};selLeft=null;selRight=null;clearTimeout(wrongTimer);wrongTimer=setTimeout(()=>{wrongPair=null;draw();},500);} } draw(); });
+        grid.appendChild(rb);
+      });
+      sec.appendChild(grid);
+      if(matched.size===group.length){
+        sec.appendChild(btn({class:'btn-dark',style:'margin-top:20px',onClick:()=>{groupIdx++;doGroup();}},[groupIdx+1<totalGroups?'다음 세트 →':'결과 보기 →']));
+      }
+      app.innerHTML='';app.appendChild(sec);
+    }
+    draw();
+  }
+  doGroup();
+}
+
+// ── FULL TEST ─────────────────────────────────────────────
+function renderTest(){
+  const pool=getActiveWords();
+  const questions=genQuestions(pool);
+  const selected={};let done=false;
+  setActiveTest('시험지',()=>{ const ans=Object.keys(selected).length; const cor=questions.filter(q=>selected[q.id]===q.answer).length; return {correct:cor,answered:ans}; });
+  function draw(){
+    const sec=div({class:'section'});
+    if(done){
+      clearActiveTest();
+      const correct=questions.filter(q=>selected[q.id]===q.answer).length;
+      const pct=Math.round(correct/questions.length*100);
+      const wrongWords=questions.filter(q=>selected[q.id]!==q.answer).map(q=>pool.find(w=>(q.dir==='en2kr'?w.en:w.kr)===q.prompt)).filter(Boolean);
+      saveHistory('시험지',correct,questions.length,true,pool,wrongWords);
+      const g=gradeInfo(pct);
+      const gc=div({class:'grade-card',style:`background:${g.bg};border:1.5px solid ${g.color}33`});
+      gc.innerHTML=`<div class="grade-pct" style="color:${g.color}">${pct}%</div><div class="grade-sub">${correct} / ${questions.length} 정답</div><div class="grade-label" style="color:${g.color}">${g.label}</div>`;
+      sec.appendChild(gc);
+      questions.forEach((q,idx)=>{
+        const uc=selected[q.id],isC=uc===q.answer;
+        const ri=div({class:'result-item',style:`border:1.5px solid ${isC?'#bbf7d0':'#fecaca'};background:${isC?'#f0fdf4':'#fff5f5'}`});
+        const rh=div({class:'result-header',style:`border-bottom:1px solid ${isC?'#bbf7d0':'#fecaca'}`});
+        rh.innerHTML=`<span style="font-size:12px;color:#9ca3af">${idx+1}.</span><span class="tag">${q.hint}</span><span style="font-size:15px;font-weight:700;color:#111">${q.prompt}</span><span style="margin-left:auto">${isC?'✅':'❌'}</span>`;
+        ri.appendChild(rh);
+        const rc=div({class:'result-choices'});
+        q.choices.forEach((ch,ci)=>{
+          const isA=ch===q.answer,isU=ch===uc;
+          const d=div({class:'rc',style:`background:${isA?'#dcfce7':isU&&!isC?'#fee2e2':'transparent'};color:${isA?'#16a34a':isU&&!isC?'#dc2626':'#6b7280'};border:1px solid ${isA?'#86efac':isU&&!isC?'#fca5a5':'#e5e7eb'};font-weight:${isA||(isU&&!isC)?700:400}`});
+          d.innerHTML=`<span style="opacity:.4;font-size:12px">${LABELS[ci]}</span>${ch}${isA?'<span style="margin-left:auto">✓</span>':''}`;
+          rc.appendChild(d);
+        });
+        ri.appendChild(rc);sec.appendChild(ri);
+      });
+      const row=div({style:'display:flex;gap:10px;margin-top:8px'});
+      row.appendChild(btn({class:'btn-outline',onClick:()=>render('mode')},['← 뒤로']));
+      row.appendChild(btn({class:'btn-outline',onClick:()=>render('test')},['다시 풀기 🔄']));
+      sec.appendChild(row);app.innerHTML='';app.appendChild(sec);return;
+    }
+    const answered=Object.keys(selected).length;
+    const topRow=div({class:'row',style:'margin-bottom:20px'});
+    topRow.appendChild(btn({class:'back-btn',onClick:()=>{ const ans=Object.keys(selected).length; if(ans>0) saveHistory('시험지',questions.filter(q=>selected[q.id]===q.answer).length,ans,false); clearActiveTest(); render('mode'); }},['←']));
+    topRow.appendChild(span({style:'font-size:16px;font-weight:700;color:#111'},['📝 시험지']));
+    topRow.appendChild(span({style:'font-size:13px;color:#6b7280;margin-left:auto'},[answered+' / '+questions.length]));
+    sec.appendChild(topRow);
+    const list=div({style:'display:flex;flex-direction:column;gap:20px'});
+    questions.forEach((q,idx)=>{
+      const qd=div({});
+      const qrow=div({style:'display:flex;align-items:baseline;gap:8px;margin-bottom:10px'});
+      qrow.innerHTML=`<span style="font-size:13px;color:#9ca3af;min-width:22px">${idx+1}.</span><div><span class="tag">${q.hint}</span> <span style="font-size:17px;font-weight:700;color:#111">${q.prompt}</span></div>`;
+      qd.appendChild(qrow);
+      const cg=div({class:'choices',style:'padding-left:30px'});
+      q.choices.forEach((ch,ci)=>{
+        const isSel=selected[q.id]===ch;
+        const b=btn({class:'choice-btn'+(isSel?' selected':''),onClick:()=>{selected[q.id]=ch;draw();}});
+        b.innerHTML=`<span style="opacity:.45;font-size:13px">${LABELS[ci]}</span>${ch}`;
+        cg.appendChild(b);
+      });
+      qd.appendChild(cg);list.appendChild(qd);
+    });
+    sec.appendChild(list);
+    if(answered<questions.length) sec.appendChild(p({style:'text-align:center;font-size:12px;color:#f59e0b;margin-top:20px;margin-bottom:4px'},['⚠ '+(questions.length-answered)+'문제 아직 선택 안 됨']));
+    sec.appendChild(btn({class:'btn-dark',style:'margin-top:'+(answered<questions.length?'8':'24')+'px',onClick:()=>{done=true;draw();}},['채점하기 ✓']));
+    app.innerHTML='';app.appendChild(sec);
+  }
+  draw();
+}
+
+// ── HISTORY ───────────────────────────────────────────────
+function renderHistory(){
+  const sec=div({class:'section'});
+  const topRow=div({class:'row',style:'margin-bottom:20px'});
+  topRow.appendChild(btn({class:'back-btn',onClick:()=>render(_words.length>=2?'mode':'input')},['←']));
+  topRow.appendChild(span({style:'font-size:16px;font-weight:700;color:#111'},['📊 시험 히스토리']));
+  topRow.appendChild(btn({class:'btn-ghost',style:'margin-left:auto',onClick:()=>{ if(confirm('히스토리를 모두 삭제할까요?')){localStorage.removeItem(hKey());render('history');} }},['전체 삭제']));
+  sec.appendChild(topRow);
+
+  const hist=JSON.parse(localStorage.getItem(hKey())||'[]');
+  if(!hist.length){
+    sec.appendChild(p({style:'text-align:center;color:#9ca3af;font-size:14px;padding:40px 0'},['아직 기록이 없어요']));
+  } else {
+    const icons={'한 문제씩':'🎯','직접 입력':'✍️','짝 맞추기':'🔗','시험지':'📝'};
+
+    hist.forEach(h=>{
+      const g=gradeInfo(h.pct);
+      const isDone=h.done!==false;
+      const hasTested=h.tested&&h.tested.length>0;
+      const item=div({class:'hist-item',style:'cursor:pointer'});
+
+      // ── Summary row ──
+      const summary=div({});
+      summary.innerHTML=`
+        <div class="hist-row">
+          <span class="hist-mode">${icons[h.mode]||'📝'} ${h.mode}${!isDone?' <span style="font-size:10px;background:#fef9c3;color:#b45309;border:1px solid #fde68a;border-radius:4px;padding:1px 6px;margin-left:4px">중단</span>':''}</span>
+          <span style="display:flex;align-items:center;gap:6px">
+            <span class="hist-score" style="color:${g.color}">${h.pct}%</span>
+            <span class="hist-toggle" style="font-size:11px;color:#9ca3af">상세 ▾</span>
+          </span>
+        </div>
+        <div class="hist-row" style="margin-top:4px">
+          <span class="hist-date">${h.date}</span>
+          <span style="font-size:13px;color:#6b7280">${h.correct} / ${h.total} 정답</span>
+        </div>`;
+      item.appendChild(summary);
+
+      // ── Detail panel ──
+      const detail=div({style:'display:none;margin-top:12px;border-top:1px solid #e5e7eb;padding-top:12px'});
+
+      function buildDetail(){
+        detail.innerHTML='';
+        const wrongSet=new Set((h.wrongs||[]).map(w=>w.en));
+
+        // Wrongs section
+        if(h.wrongs&&h.wrongs.length>0){
+          detail.appendChild(p({style:'font-size:11px;font-weight:700;color:#dc2626;margin-bottom:6px;letter-spacing:.5px'},['❌ 틀린 단어 '+h.wrongs.length+'개']));
+          h.wrongs.forEach(w=>{
+            const isStarred=getStars().has(w.en);
+            const row=div({style:'display:grid;grid-template-columns:1fr 1fr 32px;align-items:center;padding:7px 10px;border-radius:6px;background:#fff5f5;border:1px solid #fecaca;margin-bottom:3px'});
+            const es=document.createElement('span'); es.style.cssText='font-size:13px;font-weight:600;color:#111'; es.textContent=w.en;
+            const ks=document.createElement('span'); ks.style.cssText='font-size:13px;color:#374151'; ks.textContent=w.kr;
+            const sb=btn({style:`background:none;border:none;font-size:16px;cursor:pointer;padding:0;opacity:${isStarred?1:.3}`,
+              onClick:e=>{ e.stopPropagation(); toggleStar(w.en); buildDetail(); }
+            },[isStarred?'⭐':'☆']);
+            row.appendChild(es); row.appendChild(ks); row.appendChild(sb);
+            detail.appendChild(row);
+          });
+        }
+
+        // All tested words section
+        if(hasTested){
+          const label=h.wrongs&&h.wrongs.length>0?'📋 출제된 전체 단어 '+h.tested.length+'개':'✅ 출제된 단어 '+h.tested.length+'개 (전부 정답!)';
+          detail.appendChild(p({style:'font-size:11px;font-weight:700;color:#6b7280;margin-top:'+(h.wrongs&&h.wrongs.length?'12':'0')+'px;margin-bottom:6px;letter-spacing:.5px'},[label]));
+          h.tested.forEach(w=>{
+            const isWrong=wrongSet.has(w.en);
+            const isStarred=getStars().has(w.en);
+            const row=div({style:`display:grid;grid-template-columns:1fr 1fr 20px 32px;align-items:center;padding:6px 10px;border-radius:6px;background:${isWrong?'#fff5f5':'#f9fafb'};border:1px solid ${isWrong?'#fecaca':'#f3f4f6'};margin-bottom:3px`});
+            const es=document.createElement('span'); es.style.cssText='font-size:12px;font-weight:600;color:#111'; es.textContent=w.en;
+            const ks=document.createElement('span'); ks.style.cssText='font-size:12px;color:#374151'; ks.textContent=w.kr;
+            const badge=document.createElement('span'); badge.style.cssText='font-size:12px'; badge.textContent=isWrong?'❌':'✅';
+            const sb=btn({style:`background:none;border:none;font-size:15px;cursor:pointer;padding:0;opacity:${isStarred?1:.3}`,
+              onClick:e=>{ e.stopPropagation(); toggleStar(w.en); buildDetail(); }
+            },[isStarred?'⭐':'☆']);
+            row.appendChild(es); row.appendChild(ks); row.appendChild(badge); row.appendChild(sb);
+            detail.appendChild(row);
+          });
+        }
+      }
+
+      buildDetail();
+      item.appendChild(detail);
+
+      // Toggle on click
+      item.addEventListener('click',()=>{
+        const isOpen=detail.style.display!=='none';
+        detail.style.display=isOpen?'none':'block';
+        const toggle=summary.querySelector('.hist-toggle');
+        if(toggle) toggle.textContent=isOpen?'상세 ▾':'접기 ▴';
+      });
+
+      sec.appendChild(item);
+    });
+  }
+  app.appendChild(sec);
+}
+
+// ── Shared render helpers ──────────────────────────────────
+function renderProgressRow(sec,idx,total,score,onBack){
+  const topRow=div({class:'row',style:'margin-bottom:16px'});
+  const backHandler=onBack||function(){ clearActiveTest(); render('mode'); };
+  topRow.appendChild(btn({class:'back-btn',onClick:backHandler},['←']));
+  const pw=div({class:'prog-wrap'}); pw.appendChild(div({class:'prog-bar',style:`width:${(idx/total)*100}%`})); topRow.appendChild(pw);
+  topRow.appendChild(span({style:'font-size:12px;color:#9ca3af;white-space:nowrap'},[(idx+1)+' / '+total]));
+  sec.appendChild(topRow);
+  const pills=div({style:'display:flex;gap:8px;margin-bottom:20px'});
+  pills.innerHTML=`<span class="pill-green">✓ ${score.correct}</span><span class="pill-red">✗ ${score.wrong}</span>`;
+  sec.appendChild(pills);
+}
+
+function renderDone(sec,pct,correct,total,onBack,onRetry){
+  const g=gradeInfo(pct);
+  const gc=div({class:'grade-card',style:`background:${g.bg};border:1.5px solid ${g.color}33`});
+  gc.innerHTML=`<div class="grade-pct" style="color:${g.color}">${pct}%</div><div class="grade-sub">${correct} / ${total} 정답</div><div class="grade-label" style="color:${g.color}">${g.label}</div>`;
+  sec.appendChild(gc);
+  const row=div({style:'display:flex;gap:10px'});
+  row.appendChild(btn({class:'btn-outline',onClick:onBack},['← 뒤로']));
+  row.appendChild(btn({class:'btn-outline',onClick:onRetry},['다시 풀기 🔄']));
+  sec.appendChild(row);
+}
+
+// ── Init ──────────────────────────────────────────────────
+_count=getSavedCount();
+const _savedUser=localStorage.getItem(USER_KEY);
+if(!_savedUser){
+  render('login');
+} else {
+  // Sync latest words from Supabase in background
+  sbLoadWords(_savedUser).then(text=>{
+    if(text) localStorage.setItem(_savedUser+':'+WORDS_KEY, text);
+  }).catch(()=>{}).finally(()=>{ render('input'); });
+}
+</script>
+</body>
+</html>
